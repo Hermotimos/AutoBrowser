@@ -63,3 +63,4 @@ def click_image(image_file, clicks, interval):
 #     center = pyautogui.center(location)
 #     pyautogui.moveTo(center[0], center[1])
 
+
