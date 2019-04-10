@@ -20,14 +20,14 @@ nowe_numbers = (nowe_0, nowe_1, nowe_2, nowe_3, nowe_4, nowe_5, nowe_6, nowe_7, 
 
 def try_recognize_number():
     try:
-        return recognize_number()
-    except FileNotFoundError:
-        print('{}: Number at position "Nowe" not recognized'.format(datetime.datetime.now().strftime('%H:%M:%S')))
+        assert recognize_number()
+    except AssertionError:
+        print('[{}]: Number at position "Nowe" not recognized'.format(datetime.datetime.now().strftime('%H:%M:%S')))
         return 0
 
 
-def try_recognize_number():
-    recognized = FileNotFoundError
+def recognize_number():
+    recognized = False
     for num, image in enumerate(nowe_numbers):
         if pyautogui.locateOnScreen(image):
             recognized = num
@@ -46,25 +46,3 @@ def click_image(image_file, clicks, interval):
     location = pyautogui.locateOnScreen(image_file)
     center = pyautogui.center(location)
     pyautogui.click(center[0], center[1], clicks=clicks, interval=interval, duration=0.5)
-
-
-# prototype:
-# def try_go_to_image(image_file, err_cnt=0):
-#     name = image_file[9:].split('.')[0]
-#     now = datetime.datetime.now().strftime('%H:%M:%S')
-#     try:
-#         if err_cnt == 0:
-#             print('[{}] do: {:20} {:5}'.format(now, name, err_cnt), end='')
-#         go_to_image(image_file)
-#     except TypeError:
-#         err_cnt += 1
-#         print('{}[{}] do: {:20} {:5}'.format('\b'*100, now, name, err_cnt), end='')
-#         try_go_to_image(image_file, err_cnt)
-#
-#
-# def go_to_image(image_file):
-#     location = pyautogui.locateOnScreen(image_file)
-#     center = pyautogui.center(location)
-#     pyautogui.moveTo(center[0], center[1])
-
-
