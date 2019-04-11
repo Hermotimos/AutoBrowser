@@ -10,8 +10,8 @@ def main_flow(pages_to_browse):
 
     try:
         start_browsing()
-        new_sum = browse_pages(num_pages)
-        finish_browsing(new_sum)
+        browse_pages(num_pages)
+        finish_browsing()
     except RecursionError:
         print('\nPROGRAM RECALIBRATION')
         main_flow(num_pages)

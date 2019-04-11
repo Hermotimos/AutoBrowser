@@ -1,5 +1,5 @@
 from movement_and_clicks_v2 import *
-import datetime
+import time
 from reporting import ParsingReport
 
 report = ParsingReport()
@@ -28,20 +28,15 @@ def browse_pages(number_of_pages):
     new_sum_total = 0
 
     for page in pages_to_browse:
-        try:
-            print('{}'.format(str(page)))
-            new_per_page = browse_one_page()
-            new_sum_total += new_per_page
-            print('\t' * 12, '+{}/[{}]'.format(new_per_page, new_sum_total))
-        except StopIteration:
-            pass
-    return new_sum_total
+        print('{}'.format(page))
+        new_per_page = browse_one_page()
+        new_sum_total += new_per_page
+        print('\t' * 12, '+{}/[{}]'.format(new_per_page, new_sum_total))
 
 
-
-
-def finish_browsing(new_items):
-    now = datetime.datetime.now().strftime('%H.%M')
+def finish_browsing():
     last_page = pyautogui.screenshot()
-    last_page.save('C:\\Users\\Lukasz\\Desktop\\recent__{}.jpg'.format(now))
-    print('-'*20, '\nFinished: {}\nNew: {}'.format(now, new_items))
+    last_page.save('.\\reports\\recent__{}.jpg'.format(time.strftime('%H.%M')))
+
+    # todo create dir if not exists
+    # todo write report to file
