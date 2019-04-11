@@ -1,7 +1,7 @@
 import sys
 import pyautogui
 import time
-from image_processing_v2 import try_click_image, try_recognize_number
+from image_processing_v2 import try_click_image, recognize_number
 
 sys.setrecursionlimit(100)
 pyautogui.PAUSE = 0.01                          # was 0.1, see what happens in terms of parser efficiency
@@ -76,7 +76,7 @@ def switch_to_search_window():
 
 
 def click_back_n_times():
-    new = try_recognize_number()
+    new = recognize_number()
     n_times = new + 1
     try_click_image(IMG_BACK, clicks=n_times, interval=0.5)
     return new

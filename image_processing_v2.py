@@ -1,6 +1,5 @@
 import sys
 import pyautogui
-import datetime
 
 sys.setrecursionlimit(100)
 
@@ -18,16 +17,9 @@ nowe_10 = '.\\images\\nowe_10.png'
 nowe_numbers = (nowe_0, nowe_1, nowe_2, nowe_3, nowe_4, nowe_5, nowe_6, nowe_7, nowe_8, nowe_9, nowe_10)
 
 
-def try_recognize_number():
-    try:
-        assert recognize_number()
-    except AssertionError:
-        print('[{}]: Number at position "Nowe" not recognized'.format(datetime.datetime.now().strftime('%H:%M:%S')))
-        return 0
-
-
 def recognize_number():
-    recognized = False
+    """ Return number 0-10 for the number present at position 'Nowe', or 0 if not recognized """
+    recognized = 0
     for num, image in enumerate(nowe_numbers):
         if pyautogui.locateOnScreen(image):
             recognized = num
