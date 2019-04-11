@@ -12,7 +12,7 @@ def start_browsing():
     report.write_report(set_strony)
 
 
-def browse_pages(pages_to_browse):
+def browse_pages(number_of_pages):
 
     def browse_one_page():
         report.write_report(await_blueline)
@@ -24,20 +24,20 @@ def browse_pages(pages_to_browse):
         report.write_report(click_next)
         return new_items
 
-    new_count = 0
-    pages_browsed = 1
+    pages_to_browse = (n for n in range(1, number_of_pages + 1))
+    new_sum_total = 0
 
-    while pages_to_browse > 0:
-        print('{}'.format(str(pages_browsed)))
+    for page in pages_to_browse:
+        try:
+            print('{}'.format(str(page)))
+            new_per_page = browse_one_page()
+            new_sum_total += new_per_page
+            print('\t' * 12, '+{}/[{}]'.format(new_per_page, new_sum_total))
+        except StopIteration:
+            pass
+    return new_sum_total
 
-        new_per_page = browse_one_page()
 
-        new_count += new_per_page
-        pages_browsed += 1
-        pages_to_browse -= 1
-        print('\t' * 12, '+{}/[{}]'.format(new_per_page, new_count))
-
-    return new_count
 
 
 def finish_browsing(new_items):
