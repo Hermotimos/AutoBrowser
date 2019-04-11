@@ -4,7 +4,7 @@ import time
 from image_processing_v2 import try_click_image, recognize_number
 
 sys.setrecursionlimit(100)
-pyautogui.PAUSE = 0.01                          # was 0.1, see what happens in terms of parser efficiency
+pyautogui.PAUSE = 0.5
 pyautogui.FAILSAFE = True
 
 IMG_NROSTAT = '.\\images\\IMG_NROSTAT.png'
