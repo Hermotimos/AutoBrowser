@@ -1,25 +1,27 @@
 from movement_and_clicks_v2 import *
 import datetime
-from reporting import call_and_report
+from reporting import ParsingReport
+
+report = ParsingReport()
 
 
 def start_browsing():
-    if call_and_report(determine_startpoint):
-        call_and_report(scrolldown_startpage)
-        call_and_report(click_search)
-    call_and_report(set_strony)
+    if report.write_report(determine_startpoint):
+        report.write_report(scrolldown_startpage)
+        report.write_report(click_search)
+    report.write_report(set_strony)
 
 
 def browse_pages(pages_to_browse):
 
     def browse_one_page():
-        call_and_report(await_blueline)
-        call_and_report(actively_check_list_site)
-        call_and_report(click_start)
-        call_and_report(switch_window_when_finished)
-        new_items = call_and_report(click_back_n_times)
-        call_and_report(actively_check_list_site)
-        call_and_report(click_next)
+        report.write_report(await_blueline)
+        report.write_report(actively_check_list_site)
+        report.write_report(click_start)
+        report.write_report(switch_window_when_done)
+        new_items = report.write_report(click_back_n_times)
+        report.write_report(actively_check_list_site)
+        report.write_report(click_next)
         return new_items
 
     new_count = 0
@@ -33,7 +35,7 @@ def browse_pages(pages_to_browse):
         new_count += new_per_page
         pages_browsed += 1
         pages_to_browse -= 1
-        print('\t' * 15, '+{}/[{}]'.format(new_per_page, new_count))
+        print('\t' * 12, '+{}/[{}]'.format(new_per_page, new_count))
 
     return new_count
 
