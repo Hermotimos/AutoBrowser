@@ -65,13 +65,13 @@ def click_start():
         click_start()
 
 
-def switch_window_when_finished():
+def switch_window_when_done():
     if pyautogui.locateOnScreen(IMG_NOWE_DONE, 60):
         try_click_image(IMG_WYSZUKIWARKA)
     elif pyautogui.locateOnScreen(IMG_WYSZUKIWARKA_2, 1):
         pass
     else:
-        switch_window_when_finished()
+        switch_window_when_done()
 
 
 def click_back_n_times():
