@@ -7,12 +7,12 @@ def call_and_report(called_function):
     print('[{}] '.format(datetime.datetime.now().strftime('%H:%M:%S')), end='')
     print('{:25}'.format(called_function.__repr__().split()[1]), end='')
     
-    anyreturn = called_function()
+    returned = called_function()
     back_n_times = ''
     if called_function.__repr__().split()[1] == 'click_back_n_times':
-        back_n_times = str(1 + anyreturn) + 'x'
+        back_n_times = str(1 + returned) + 'x'
 
-    print('{:3}\t{}s\t'.format(back_n_times, round(time.time() - start)), end='')
+    print('{:3}\t{:-3}s\t'.format(back_n_times, round(time.time() - start)), end='')
     print('[{}] '.format(datetime.datetime.now().strftime('%H:%M:%S')))
 
-    return anyreturn
+    return returned
