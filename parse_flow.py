@@ -16,7 +16,7 @@ def browse_pages(pages_to_browse):
         call_and_report(await_blueline)
         call_and_report(actively_check_list_site)
         call_and_report(click_start)
-        call_and_report(switch_to_search_window)
+        call_and_report(switch_window_when_finished)
         new_items = call_and_report(click_back_n_times)
         call_and_report(actively_check_list_site)
         call_and_report(click_next)

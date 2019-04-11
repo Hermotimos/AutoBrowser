@@ -7,18 +7,18 @@ sys.setrecursionlimit(100)
 pyautogui.PAUSE = 0.5
 pyautogui.FAILSAFE = True
 
-IMG_NROSTAT = '.\\images\\IMG_NROSTAT.png'
+IMG_LISTA = '.\\images\\IMG_LISTA.png'
 IMG_STATUS = '.\\images\\IMG_STATUS.png'
 IMG_SZUKAJ = '.\\images\\IMG_SZUKAJ.png'
-IMG_START_BLACK = '.\\images\\IMG_START_BLACK.png'
-IMG_NASTEPNA = '.\\images\\IMG_NASTEPNA.png'
-IMG_NASTEPNA_2 = '.\\images\\IMG_NASTEPNA_2.png'
-IMG_START_GREY = '.\\images\\IMG_START_GREY.png'
-IMG_WYSZUKIWARKA = '.\\images\\IMG_WYSZUKIWARKA.png'
-IMG_WYSZUKIWARKA_2 = '.\\images\\IMG_WYSZUKIWARKA_2.png'
+IMG_NROSTAT = '.\\images\\IMG_NROSTAT.png'
 IMG_BLUELINE = '.\\images\\IMG_BLUELINE.png'
 IMG_BACK = '.\\images\\IMG_BACK.png'
-IMG_LISTA = '.\\images\\IMG_LISTA.png'
+IMG_START_BLACK = '.\\images\\IMG_START_BLACK.png'
+IMG_NOWE_DONE = '.\\images\\IMG_NOWE_DONE.png'
+IMG_WYSZUKIWARKA = '.\\images\\IMG_WYSZUKIWARKA.png'
+IMG_WYSZUKIWARKA_2 = '.\\images\\IMG_WYSZUKIWARKA_2.png'
+IMG_NASTEPNA = '.\\images\\IMG_NASTEPNA.png'
+IMG_NASTEPNA_2 = '.\\images\\IMG_NASTEPNA_2.png'
 
 
 # ELEMENTS OF start_browsing()
@@ -65,13 +65,13 @@ def click_start():
         click_start()
 
 
-def switch_to_search_window():
-    if pyautogui.locateOnScreen(IMG_START_GREY, 60):
+def switch_window_when_finished():
+    if pyautogui.locateOnScreen(IMG_NOWE_DONE, 60):
         try_click_image(IMG_WYSZUKIWARKA)
     elif pyautogui.locateOnScreen(IMG_WYSZUKIWARKA_2, 1):
         pass
     else:
-        switch_to_search_window()
+        switch_window_when_finished()
 
 
 def click_back_n_times():
