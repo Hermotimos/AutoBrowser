@@ -12,6 +12,7 @@ IMG_STATUS = '.\\images\\IMG_STATUS.png'
 IMG_SZUKAJ = '.\\images\\IMG_SZUKAJ.png'
 IMG_NROSTAT = '.\\images\\IMG_NROSTAT.png'
 IMG_BLUELINE = '.\\images\\IMG_BLUELINE.png'
+IMG_BLUELINE_2 = '.\\images\\IMG_BLUELINE_2.png'
 IMG_BACK = '.\\images\\IMG_BACK.png'
 IMG_START_BLACK = '.\\images\\IMG_START_BLACK.png'
 IMG_NOWE_DONE = '.\\images\\IMG_NOWE_DONE.png'
@@ -24,15 +25,17 @@ IMG_NASTEPNA_2 = '.\\images\\IMG_NASTEPNA_2.png'
 # ELEMENTS OF start_browsing()
 def determine_startpoint():
     if pyautogui.locateOnScreen(IMG_STATUS, 1):
-        return True
+        return 1
     elif pyautogui.locateOnScreen(IMG_LISTA, 1):
-        return False
+        return 2
+    elif pyautogui.locateOnScreen(IMG_NASTEPNA, 1) or pyautogui.locateOnScreen(IMG_NASTEPNA_2, 1):
+        return 3
     else:
         pyautogui.scroll(7000)
         determine_startpoint()
 
 
-def scrolldown_startpage():
+def click_status_and_scrolldown():
     try_click_image(IMG_STATUS)
     pyautogui.scroll(-7000)
 
@@ -52,6 +55,8 @@ def set_strony():
 def await_blueline():
     time.sleep(1)
     if pyautogui.locateOnScreen(IMG_BLUELINE, 60):
+        pass
+    elif pyautogui.locateOnScreen(IMG_BLUELINE_2, 1):       # TODO not tested so far
         pass
     else:
         try_click_image(IMG_BACK)

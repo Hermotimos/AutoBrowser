@@ -1,14 +1,21 @@
-from movement_and_clicks_v2 import *
 import time
+import pyautogui
 from reporting import ParsingReport
-
+from movement_and_clicks_v2 import determine_startpoint, click_status_and_scrolldown, click_search, set_strony, \
+                                   await_blueline, click_start, switch_window_when_done, click_back_n_times, \
+                                   actively_check_list_site, click_next
 report = ParsingReport()
 
 
 def start_browsing():
-    if report.write_report(determine_startpoint):
-        report.write_report(scrolldown_startpage)
+    start_point = report.write_report(determine_startpoint)
+    if start_point == 1:
+        report.write_report(click_status_and_scrolldown)
         report.write_report(click_search)
+    elif start_point == 2:
+        pass
+    elif start_point == 3:
+        report.write_report(click_next)
     report.write_report(set_strony)
 
 
