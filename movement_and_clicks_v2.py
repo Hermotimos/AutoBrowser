@@ -81,7 +81,7 @@ def click_back_n_times():
     return new
 
 
-def actively_check_list_site():                             # todo rethink this one
+def actively_check_list_site():                             # todo rethink this one: maybe use click_start in else
     if pyautogui.locateOnScreen(IMG_LISTA, 15):
         try_click_image(IMG_LISTA)
     else:
