@@ -37,8 +37,7 @@ def scrolldown_startpage():
     pyautogui.scroll(-7000)
 
 
-def click_search():
-    try_click_image(IMG_SZUKAJ)
+def click_search(): try_click_image(IMG_SZUKAJ)
 
 
 def set_strony():
