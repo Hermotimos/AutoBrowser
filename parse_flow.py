@@ -42,4 +42,4 @@ def finish_browsing(new_items):
     now = datetime.datetime.now().strftime('%H.%M')
     last_page = pyautogui.screenshot()
     last_page.save('C:\\Users\\Lukasz\\Desktop\\recent__{}.jpg'.format(now))
-    print('-'*20, 'END', '-'*20, '\nFinished: {}\nNew: {}'.format(now, new_items))
+    print('-'*20, '\nFinished: {}\nNew: {}'.format(now, new_items))
