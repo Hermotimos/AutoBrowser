@@ -18,7 +18,7 @@ nowe_numbers = (nowe_0, nowe_1, nowe_2, nowe_3, nowe_4, nowe_5, nowe_6, nowe_7, 
 
 
 def recognize_number():
-    """ Return number 0-10 for the number present at position 'Nowe', or 0 if not recognized """
+    """Return number 0-10 for the number present at position 'Nowe', or 0 if not recognized."""
     recognized = 0
     for num, image in enumerate(nowe_numbers):
         if pyautogui.locateOnScreen(image):
