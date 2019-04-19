@@ -1,7 +1,7 @@
 import time
 import pyautogui
-from reporting import ParsingReport
-from movement_and_clicks_v2 import determine_startpoint, click_status_and_scrolldown, click_search, set_strony, \
+from report_class import ParsingReport
+from movement_and_clicks import determine_startpoint, click_status_and_scrolldown, click_search, set_strony, \
                                    await_blueline, click_start, switch_window_when_done, click_back_n_times, \
                                    actively_check_list_site, click_next
 report = ParsingReport()

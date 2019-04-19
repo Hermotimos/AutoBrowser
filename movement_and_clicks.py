@@ -1,7 +1,7 @@
 import sys
 import pyautogui
 import time
-from image_processing_v2 import try_click_image, recognize_number
+from image_processing import try_click_image, recognize_number
 
 sys.setrecursionlimit(100)
 pyautogui.PAUSE = 0.5

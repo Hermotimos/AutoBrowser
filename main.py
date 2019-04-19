@@ -1,7 +1,7 @@
 import os
 import pyautogui
 import datetime
-from parse_flow import start_browsing, browse_pages, finish_browsing
+from browsing_flow import start_browsing, browse_pages, finish_browsing
 from settings import ask_number_pages, ask_shutdown
 
 
