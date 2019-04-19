@@ -1,3 +1,7 @@
+"""
+This module contains functions for recognition of meaningful site features and clicking them.
+
+"""
 import sys
 import pyautogui
 
