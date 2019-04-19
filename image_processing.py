@@ -1,7 +1,7 @@
 """
 This module contains functions for recognition of meaningful site features and clicking them.
-
 """
+
 import sys
 import pyautogui
 
@@ -32,6 +32,18 @@ def recognize_number():
 
 
 def try_click_image(image_file, clicks=1, interval=0.0):
+    """Try call click_image() recursively until it succeeds.
+
+    Parameters
+    ----------
+        image_file (str): String representation of path to image file.
+        clicks (int): Number of clicks to perform.
+        interval (float): Time between clicks.
+
+    Raises
+    ------
+        After recursion limit is exhausted RecursionError is raised. This is handled in main.py module.
+    """
     try:
         click_image(image_file, clicks=clicks, interval=interval)
     except TypeError:
@@ -39,15 +51,17 @@ def try_click_image(image_file, clicks=1, interval=0.0):
 
 
 def click_image(image_file, clicks, interval):
-    """
+    """Recognize image on screen and click it.
 
     Parameters
     ----------
-        image_file
-        clicks
-        interval
+        image_file (str): String representation of path to image file.
+        clicks (int): Number of clicks to perform.
+        interval (float): Time between clicks.
 
-
+    Raises
+    ------
+        If image is not recognized on screen TypeError is raised. This is handled by try_click_image().
     """
     location = pyautogui.locateOnScreen(image_file)
     center = pyautogui.center(location)
