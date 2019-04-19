@@ -1,3 +1,27 @@
+"""
+This module defines functions that react to features/events on the site based on their recognition on screen.
+These reactions are then used in browsing_flow.py to modulate actions according to site reactions and malfunctions.
+There are two functions in browsing_flow.py that use functions from this module:
+
+1) start_browsing() uses following functions:
+
+determine_startpoint():
+click_status_and_scrolldown():
+click_search():
+set_strony():
+
+
+2) browse_pages() uses following functions:
+await_blueline():
+click_start():
+switch_window_when_done():
+click_back_n_times():
+actively_check_list_site():
+click_next():
+
+"""
+
+
 import sys
 import pyautogui
 import time
