@@ -1,5 +1,5 @@
 """
-This module defines browsing flow according to site reactions and malfunctions.
+This module defines browsing flow.
 
 
 """
