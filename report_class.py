@@ -1,3 +1,7 @@
+"""
+This module defines class ParsingReport which serves both as log and as report.
+"""
+
 import time
 
 
