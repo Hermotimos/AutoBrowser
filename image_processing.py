@@ -1,7 +1,8 @@
 """
 This module contains image data and functions for recognition of meaningful site features and clicking them.
 
-Image data constants are represented by constants NOWE_0, NOWE_1 etc. These are used by function recognize_number().
+Image data constants are represented by constants NOWE_0, NOWE_1 etc., which contain paths to image files.
+These are used by function recognize_number().
 
 recognize_number(): Returns number recognized at specific spot or 0 if not recognized.
 try_click_image(): calls click_image() - which clicks image specified via file path -
