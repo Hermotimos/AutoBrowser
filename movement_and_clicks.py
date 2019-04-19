@@ -1,6 +1,9 @@
 """
-This module defines functions that react to features/events on the site based on their recognition on screen.
-These reactions are then used in browsing_flow.py to modulate actions according to site reactions and malfunctions.
+This module defines functions that react to site features/events based on their recognition on screen.
+
+Site features/events are represented by constants IMG_LISTA, IMG_STATUS etc., which contain paths to image files.
+Functions in this module react to these features/events. These reactions are building blocks of browsing_flow.py.
+
 There are two functions in browsing_flow.py that use functions from this module:
 
 1) start_browsing() uses following functions:
