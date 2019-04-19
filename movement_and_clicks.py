@@ -1,7 +1,7 @@
 import sys
 import pyautogui
 import time
-from image_processing import click_image, recognize_number
+from image_processing import try_click_image, recognize_number
 
 sys.setrecursionlimit(100)
 pyautogui.PAUSE = 0.5
@@ -36,15 +36,15 @@ def determine_startpoint():
 
 
 def click_status_and_scrolldown():
-    click_image(IMG_STATUS)
+    try_click_image(IMG_STATUS)
     pyautogui.scroll(-7000)
 
 
-def click_search(): click_image(IMG_SZUKAJ)
+def click_search(): try_click_image(IMG_SZUKAJ)
 
 
 def set_strony():
-    click_image(IMG_NROSTAT)
+    try_click_image(IMG_NROSTAT)
     pyautogui.move(0, 20)
     pyautogui.click()
     pyautogui.press('delete', presses=5)
@@ -59,20 +59,20 @@ def await_blueline():
     elif pyautogui.locateOnScreen(IMG_BLUELINE_2, 1):       # TODO not tested so far
         pass
     else:
-        click_image(IMG_BACK)
+        try_click_image(IMG_BACK)
 
 
 def click_start():
     if pyautogui.locateOnScreen(IMG_START_BLACK, 30):
-        click_image(IMG_START_BLACK)
+        try_click_image(IMG_START_BLACK)
     else:
-        click_image(IMG_BACK)
+        try_click_image(IMG_BACK)
         click_start()
 
 
 def switch_window_when_done():
     if pyautogui.locateOnScreen(IMG_NOWE_DONE, 60):
-        click_image(IMG_WYSZUKIWARKA)
+        try_click_image(IMG_WYSZUKIWARKA)
     elif pyautogui.locateOnScreen(IMG_WYSZUKIWARKA_2, 1):
         pass
     else:
@@ -82,29 +82,29 @@ def switch_window_when_done():
 def click_back_n_times():
     new = recognize_number()
     n_times = new + 1
-    click_image(IMG_BACK, clicks=n_times, interval=0.5)
+    try_click_image(IMG_BACK, clicks=n_times, interval=0.5)
     return new
 
 
 def actively_check_list_site():                             # todo rethink this one: maybe use click_start in else
     if pyautogui.locateOnScreen(IMG_LISTA, 15):
-        click_image(IMG_LISTA)
+        try_click_image(IMG_LISTA)
     else:
         pyautogui.locateOnScreen(IMG_BACK)
         pyautogui.move(0, 30)
         pyautogui.scroll(7000)
         if pyautogui.locateOnScreen(IMG_LISTA, 15):
-            click_image(IMG_LISTA)
+            try_click_image(IMG_LISTA)
         else:
-            click_image(IMG_BACK)
+            try_click_image(IMG_BACK)
             actively_check_list_site()
 
 
 def click_next():
     pyautogui.scroll(-7000)
     if pyautogui.locateOnScreen(IMG_NASTEPNA, 2):
-        click_image(IMG_NASTEPNA)
+        try_click_image(IMG_NASTEPNA)
     elif pyautogui.locateOnScreen(IMG_NASTEPNA_2, 2):
-        click_image(IMG_NASTEPNA_2)
+        try_click_image(IMG_NASTEPNA_2)
     else:
         click_next()
