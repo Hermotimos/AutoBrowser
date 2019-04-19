@@ -31,14 +31,17 @@ def recognize_number():
     return recognized
 
 
-def try_click_image(image_file, clicks=1, interval=0.0):
-    try:
-        click_image(image_file, clicks=clicks, interval=interval)
-    except TypeError:
-        try_click_image(image_file,  clicks=clicks, interval=interval)
+def try_click_image(func):
+    def wrapper(*args, **kwargs):
+        try:
+            func(*args, **kwargs)
+        except TypeError:
+            try_click_image(func)
+    return wrapper
 
 
-def click_image(image_file, clicks, interval):
+@try_click_image
+def click_image(image_file, clicks=1, interval=0.0):
     location = pyautogui.locateOnScreen(image_file)
     center = pyautogui.center(location)
     pyautogui.click(center[0], center[1], clicks=clicks, interval=interval, duration=0.5)
