@@ -14,7 +14,8 @@ click_search():
 set_strony():
 
 
-2) browse_pages() uses following functions:
+2) do_browsing() uses following functions:
+
 await_blueline():
 click_start():
 switch_window_when_done():
@@ -78,7 +79,7 @@ def set_strony():
     pyautogui.typewrite('1')
 
 
-# ELEMENTS of browse_pages()
+# ELEMENTS of do_browsing()
 def await_blueline():
     time.sleep(1)
     if pyautogui.locateOnScreen(IMG_BLUELINE, 60):
