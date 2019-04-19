@@ -1,5 +1,7 @@
 """
-This module contains functions for recognition of meaningful site features and clicking them.
+This module contains image data and functions for recognition of meaningful site features and clicking them.
+
+Image data constants are represented by constants NOWE_0, NOWE_1 etc. These are used by function recognize_number().
 
 recognize_number(): Returns number recognized at specific spot or 0 if not recognized.
 try_click_image(): calls click_image() - which clicks image specified via file path -
@@ -11,18 +13,18 @@ import pyautogui
 
 sys.setrecursionlimit(100)
 
-nowe_0 = '.\\images\\nowe_0.png'
-nowe_1 = '.\\images\\nowe_1.png'
-nowe_2 = '.\\images\\nowe_2.png'
-nowe_3 = '.\\images\\nowe_3.png'
-nowe_4 = '.\\images\\nowe_4.png'
-nowe_5 = '.\\images\\nowe_5.png'
-nowe_6 = '.\\images\\nowe_6.png'
-nowe_7 = '.\\images\\nowe_7.png'
-nowe_8 = '.\\images\\nowe_8.png'
-nowe_9 = '.\\images\\nowe_9.png'
-nowe_10 = '.\\images\\nowe_10.png'
-nowe_numbers = (nowe_0, nowe_1, nowe_2, nowe_3, nowe_4, nowe_5, nowe_6, nowe_7, nowe_8, nowe_9, nowe_10)
+NOWE_0 = '.\\images\\nowe_0.png'
+NOWE_1 = '.\\images\\nowe_1.png'
+NOWE_2 = '.\\images\\nowe_2.png'
+NOWE_3 = '.\\images\\nowe_3.png'
+NOWE_4 = '.\\images\\nowe_4.png'
+NOWE_5 = '.\\images\\nowe_5.png'
+NOWE_6 = '.\\images\\nowe_6.png'
+NOWE_7 = '.\\images\\nowe_7.png'
+NOWE_8 = '.\\images\\nowe_8.png'
+NOWE_9 = '.\\images\\nowe_9.png'
+NOWE_10 = '.\\images\\nowe_10.png'
+NOWE_ALL = (NOWE_0, NOWE_1, NOWE_2, NOWE_3, NOWE_4, NOWE_5, NOWE_6, NOWE_7, NOWE_8, NOWE_9, NOWE_10)
 
 
 def recognize_number():
@@ -32,7 +34,7 @@ def recognize_number():
     This allows click_back_n_times() in browsing_flow.py to perform in a minimalistic way, which may be then corrected.
     """
     recognized = 0
-    for num, image in enumerate(nowe_numbers):
+    for num, image in enumerate(NOWE_ALL):
         if pyautogui.locateOnScreen(image):
             recognized = num
             break
