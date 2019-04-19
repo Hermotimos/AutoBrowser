@@ -1,5 +1,9 @@
 """
 This module contains functions for recognition of meaningful site features and clicking them.
+
+recognize_number(): Returns number recognized at specific spot or 0 if not recognized.
+try_click_image(): calls click_image() - which clicks image specified via file path -
+                    recursively, until success or until recursion limit is met.
 """
 
 import sys
@@ -22,7 +26,11 @@ nowe_numbers = (nowe_0, nowe_1, nowe_2, nowe_3, nowe_4, nowe_5, nowe_6, nowe_7, 
 
 
 def recognize_number():
-    """Return number 0-10 for the number present at position 'Nowe', or 0 if not recognized."""
+    """Return number 0-10 for the number present at position 'Nowe', or 0 if not recognized.
+
+    If image wasn't recognized returns 0.
+    This allows click_back_n_times() in browsing_flow.py to perform in a minimalistic way, which may be then corrected.
+    """
     recognized = 0
     for num, image in enumerate(nowe_numbers):
         if pyautogui.locateOnScreen(image):
