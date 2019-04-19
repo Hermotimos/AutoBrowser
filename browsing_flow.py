@@ -7,7 +7,7 @@ This module defines browsing flow according to site reactions and malfunctions.
 import time
 import pyautogui
 from report_class import BrowsingReport
-from movement_and_clicks import determine_startpoint, click_status_and_scrolldown, click_search, set_strony, \
+from movement_and_clicks import determine_startpoint, click_status_and_search, set_strony, \
                                    await_blueline, click_start, switch_window_when_done, click_back_n_times, \
                                    actively_check_list_site, click_next
 report = BrowsingReport()
@@ -16,8 +16,7 @@ report = BrowsingReport()
 def start_browsing():
     start_point = report.write_report(determine_startpoint)
     if start_point == 1:
-        report.write_report(click_status_and_scrolldown)
-        report.write_report(click_search)
+        report.write_report(click_status_and_search)
     elif start_point == 2:
         pass
     elif start_point == 3:

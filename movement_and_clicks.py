@@ -9,8 +9,7 @@ There are two functions in browsing_flow.py that use functions from this module:
 1) start_browsing() uses following functions:
 
 determine_startpoint():
-click_status_and_scrolldown():
-click_search():
+click_status_and_search():
 set_strony():
 
 
@@ -63,12 +62,11 @@ def determine_startpoint():
         determine_startpoint()
 
 
-def click_status_and_scrolldown():
+def click_status_and_search():
+    """Click location 'Status' on starting page, scroll down and click 'Szukaj'."""
     try_click_image(IMG_STATUS)
     pyautogui.scroll(-7000)
-
-
-def click_search(): try_click_image(IMG_SZUKAJ)
+    try_click_image(IMG_SZUKAJ)
 
 
 def set_strony():
