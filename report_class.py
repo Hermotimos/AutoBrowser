@@ -1,11 +1,11 @@
 """
-This module defines class ParsingReport which serves both as log and as report.
+This module defines class BrowsingReport which serves both as log and as report.
 """
 
 import time
 
 
-class ParsingReport:
+class BrowsingReport:
     def __init__(self):
         self.report = ''
 
