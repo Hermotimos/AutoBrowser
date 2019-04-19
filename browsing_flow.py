@@ -19,7 +19,7 @@ def start_browsing():
     report.write_report(set_strony)
 
 
-def browse_pages(number_of_pages):
+def do_browsing(number_of_pages):
 
     def browse_one_page():
         report.write_report(await_blueline)
