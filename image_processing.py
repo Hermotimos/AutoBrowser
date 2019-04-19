@@ -53,7 +53,7 @@ def try_click_image(image_file, clicks=1, interval=0.0):
 
     Raises
     ------
-        After recursion limit is exhausted RecursionError is raised. This is handled in main.py module.
+        If recursion limit is exhausted RecursionError is raised. This enables main.py module to recalibrate program.
     """
     try:
         click_image(image_file, clicks=clicks, interval=interval)
