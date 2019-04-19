@@ -1,3 +1,9 @@
+"""
+This module defines browsing flow according to site reactions and malfunctions.
+
+
+"""
+
 import time
 import pyautogui
 from report_class import ParsingReport
