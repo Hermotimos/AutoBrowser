@@ -98,9 +98,9 @@ def await_blueline():
     If neither of blue line variants is visible, clicks 'back' button, as this usually unfreezes page hung by loading.
     """
     time.sleep(1)
-    if pyautogui.locateOnScreen(IMG_BLUELINE, 60):
+    if pyautogui.locateOnScreen(IMG_BLUELINE, 15):
         pass
-    elif pyautogui.locateOnScreen(IMG_BLUELINE_2, 1):
+    elif pyautogui.locateOnScreen(IMG_BLUELINE_2, 15):
         pass
     else:
         try_click_image(IMG_BACK)
