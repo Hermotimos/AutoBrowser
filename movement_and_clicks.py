@@ -139,7 +139,7 @@ def switch_window_when_done():
     if pyautogui.locateOnScreen(IMG_NOWE_DONE, 20):
         try_click_image(IMG_WYSZUKIWARKA)
     elif pyautogui.locateOnScreen(IMG_WYSZUKIWARKA_2, 1):
-        pass
+        try_click_image(IMG_WYSZUKIWARKA_2)
     else:
         switch_window_when_done()
 
