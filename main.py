@@ -1,7 +1,7 @@
 import os
 import pyautogui
 import datetime
-from browsing_flow import start_browsing, do_browsing, finish_browsing
+from browsing_flow import start_browsing, do_browsing, create_browsing_report
 from settings import ask_number_pages, ask_shutdown
 
 
@@ -11,7 +11,7 @@ def main_flow(pages_to_browse):
     try:
         start_browsing()
         do_browsing(num_pages)
-        finish_browsing()
+        create_browsing_report()
     except RecursionError:
         print('\nPROGRAM RECALIBRATION')
         main_flow(num_pages)
