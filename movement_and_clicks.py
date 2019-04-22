@@ -92,11 +92,7 @@ def set_strony():
 
 # ELEMENTS of do_browsing()
 def await_blueline():
-    """Wait until blue line indicating list of results is visible.
-
-    This function ensures that program pauses until another results page is loaded.
-    Recognition is based on the presence of blue line characteristic of the results page.
-    The line can come in two shades, of which one is more common.
+    """Wait untill blue line (one of 2 possible shades) indicating list of results is visible. If not, click 'go back'.
 
     If neither of blue line variants is visible, clicks 'back' button, as this usually unfreezes page hung by loading.
     """
