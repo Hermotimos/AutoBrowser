@@ -26,10 +26,10 @@ def start_browsing():
     If current page is start page, clicks 'Szukaj' (Search) button to reach first records page.
     If current page is records page, do nothing (let do_browsing() overtake).
     """
-    report.write_report(set_strony)
-    start_point = report.write_report(determine_startpoint)
+    report.report_function(set_strony)
+    start_point = report.report_function(determine_startpoint)
     if start_point == 1:
-        report.write_report(click_status_and_search)
+        report.report_function(click_status_and_search)
     else:
         pass
 
@@ -47,13 +47,13 @@ def do_browsing(number_of_pages):
 
     def browse_one_page():
         """Browse one result page and return count of items downloaded per page."""
-        report.write_report(await_blueline)
-        report.write_report(actively_check_list_site)
-        report.write_report(click_start)
-        report.write_report(switch_window_when_done)
-        new_items = report.write_report(click_back_n_times)
-        report.write_report(actively_check_list_site)
-        report.write_report(click_next)
+        report.report_function(await_blueline)
+        report.report_function(actively_check_list_site)
+        report.report_function(click_start)
+        report.report_function(switch_window_when_done)
+        new_items = report.report_function(click_back_n_times)
+        report.report_function(actively_check_list_site)
+        report.report_function(click_next)
         return new_items
 
     pages_to_browse = (n for n in range(1, number_of_pages + 1))
@@ -61,13 +61,13 @@ def do_browsing(number_of_pages):
 
     for page in pages_to_browse:
         print('{}'.format(page))
-        report.write_report_info(f'\n{str(page)}\n')
+        report.report_non_function(f'\n{str(page)}\n')
 
         new_per_page = browse_one_page()
         new_sum_total += new_per_page
 
         print('{}+{}/[{}]'.format('\t' * 11, new_per_page, new_sum_total))
-        report.write_report_info('\n{}+{}/[{}]'.format('\t' * 5, new_per_page, new_sum_total))
+        report.report_non_function('\n{}+{}/[{}]'.format('\t' * 5, new_per_page, new_sum_total))
 
 
 def create_browsing_report():

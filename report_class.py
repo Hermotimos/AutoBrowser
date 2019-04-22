@@ -8,18 +8,18 @@ import time
 class BrowsingReport:
     """
     Its objects may serve as logs printed out during program execution and/or as reports printed out afterwards.
-    write_report(): serves as log
-    __repr__(): serves as report, is dependant from write_report()
+    report_function(): serves as log
+    __repr__(): serves as report, is dependant from report_function()
     """
 
     def __init__(self):
         """Create object of BrowsingReport with attribute 'report' as empty str."""
         self.report = ''
 
-    def write_report_info(self, line):
+    def report_non_function(self, line):
         self.report += line
 
-    def write_report(self, called_function):
+    def report_function(self, called_function):
         """For every function passed to this method write info to report attribute and print out log.
 
         For each function called as attribute of this method following data will be printed into log:
