@@ -50,15 +50,23 @@ IMG_NASTEPNA_2 = '.\\images\\IMG_NASTEPNA_2.png'
 
 # ELEMENTS OF start_browsing()
 def determine_startpoint():
-    """Determine if current page is the start page or the records page (with either header or bottom visible)
-        based on distinguishing images. Return code 1, 2, or 3 accordingly.
+    """Determine if current page is the start page or the records page. Return 1 or 2 accordingly.
+
+    If neither can be determined function scrolls up and calls itself recursively.
+
+    Returns
+    -------
+        int: Value 1 for start page, value 2 for records page.
+    Raises
+    ------
+        If recursion limit is exhausted RecursionError is raised. This enables main.py module to recalibrate program.
     """
     if pyautogui.locateOnScreen(IMG_STATUS, 1):
         return 1
-    elif pyautogui.locateOnScreen(IMG_LISTA, 1):
+    elif pyautogui.locateOnScreen(IMG_LISTA, 1) \
+            or pyautogui.locateOnScreen(IMG_NASTEPNA, 1) \
+            or pyautogui.locateOnScreen(IMG_NASTEPNA_2, 1):
         return 2
-    elif pyautogui.locateOnScreen(IMG_NASTEPNA, 1) or pyautogui.locateOnScreen(IMG_NASTEPNA_2, 1):
-        return 3
     else:
         pyautogui.scroll(7000)
         determine_startpoint()

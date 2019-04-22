@@ -17,11 +17,8 @@ def start_browsing():
     start_point = report.write_report(determine_startpoint)
     if start_point == 1:
         report.write_report(click_status_and_search)
-    elif start_point == 2:
+    else:
         pass
-    elif start_point == 3:
-        report.write_report(click_next)
-    report.write_report(set_strony)
 
 
 def do_browsing(number_of_pages):
