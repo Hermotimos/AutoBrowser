@@ -10,18 +10,18 @@ There are two functions in browsing_flow.py that use functions from this module:
 1) start_browsing() uses following functions:
 
 determine_startpoint(): Returns number representing detected current page.
-click_status_and_search(): Clicks 'Szukaj' button on main page.
+click_status_and_search(): Clicks 'Szukaj' button on start page.
 set_strony(): Sets number of pages to be browsed for downloading.
 
 
 2) do_browsing() uses following functions:
 
-await_blueline(): Holds program until records page is loaded.
+await_blueline(): Holds program until results page is loaded.
 click_start(): Clicks 'Start' button to initiate download.
 switch_window_when_done(): Goes back to search engine after download is finished.
 click_back_n_times(): Goes back n time, where n = 1 + number of pages opened during download.
-actively_check_list_site(): Checks if current page is records page.
-click_next(): Goes to next page of records.
+actively_check_list_site(): Checks if current page is results page.
+click_next(): Goes to next results page.
 """
 
 import sys
@@ -50,8 +50,8 @@ IMG_NASTEPNA_2 = '.\\images\\IMG_NASTEPNA_2.png'
 
 # ELEMENTS OF start_browsing()
 def determine_startpoint():
-    """Determine if current page is the starting page or the browsing page (up or down) based on distinguishing images.
-    Return code 1, 2, or 3 accordingly.
+    """Determine if current page is the start page or the records page (with either header or bottom visible)
+        based on distinguishing images. Return code 1, 2, or 3 accordingly.
     """
     if pyautogui.locateOnScreen(IMG_STATUS, 1):
         return 1
@@ -65,7 +65,7 @@ def determine_startpoint():
 
 
 def click_status_and_search():
-    """Click location 'Status' on main page, scroll down and click 'Szukaj'."""
+    """Click location 'Status' on start page, scroll down and click 'Szukaj'."""
     try_click_image(IMG_STATUS)
     pyautogui.scroll(-7000)
     try_click_image(IMG_SZUKAJ)
@@ -86,10 +86,10 @@ def set_strony():
 
 # ELEMENTS of do_browsing()
 def await_blueline():
-    """Wait until blue line indicating list of records is visible.
+    """Wait until blue line indicating list of results is visible.
 
-    This function ensures that program pauses until another page of records is loaded.
-    Recognition is based on the presence of blue line characteristic of the record page.
+    This function ensures that program pauses until another results page is loaded.
+    Recognition is based on the presence of blue line characteristic of the results page.
     The line can come in two shades, of which one is more common.
     Waiting time for loading is set to 60 secs, if the first variant is absent, checks second variant in 1 sec.
 
@@ -105,7 +105,7 @@ def await_blueline():
 
 
 def click_start():
-    """Click 'Start' button to start downloading records.
+    """Click 'Start' button to start downloading results.
 
     Waits 30 secs until 'Start' button is visible in inactive mode (black) and clicks it.
 
@@ -143,15 +143,15 @@ def switch_window_when_done():
 
 
 def click_back_n_times():
-    """Click 'go back' button once plus once per each record page loaded during download.
+    """Click 'go back' button once plus once per each results page loaded during download.
 
-    Clicking 'go back' once is always needed to return from start page to record page.
-    For every downloaded record another time of 'go back' is needed to reach record page.
-    Function uses recognize_number() to identify number of records downloaded and computes sum of 'go backs'.
+    Clicking 'go back' once is always needed to return from start page to results page.
+    For every downloaded results another time of 'go back' is needed to reach results page.
+    Function uses recognize_number() to identify number of results downloaded and computes sum of 'go backs'.
 
     Returns
     -------
-        int: Number of new records. This is then used by BrowsingReport class for running total of downloads.
+        int: Number of new results. This is then used by BrowsingReport class for running total of downloads.
     """
     new = recognize_number()
     n_times = new + 1
@@ -160,7 +160,7 @@ def click_back_n_times():
 
 
 def actively_check_list_site():
-    """Waits until records site is visible.
+    """Waits until results page is visible.
 
     If the site is not visible after 15 secs, clicks 'back' button, as this usually unfreezes page hung by loading.
     Then moves cursor beneath 'back' button and scrolls up in case it landed at the bottom of page.
