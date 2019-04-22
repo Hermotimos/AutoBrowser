@@ -2,9 +2,9 @@
 This module defines functions for browsing flow.
 
 This is achieved in main.py module by calling following 3 functions consecutively:
-start_browsing():
-do_browsing():
-finish_browsing():
+    start_browsing():           Goes to first or next records page.
+    do_browsing():              Browses number of pages defined by user.
+    create_browsing_report():   Saves screen shot and report to files in 'reports' directory.
 
 Firstly, browsing is started either from main page or from any result page.
 One page is browsed at a time with possible 0-10 downloads.
