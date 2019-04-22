@@ -1,7 +1,13 @@
 """
-This module defines browsing flow.
+This module defines functions for browsing flow.
 
+This is achieved in main.py module by calling following 3 functions consecutively:
+start_browsing():
+do_browsing():
+finish_browsing():
 
+Firstly, browsing is started either from main page or from any result page.
+One page is browsed at a time with possible 0-10 downloads.
 """
 
 import time
@@ -14,6 +20,12 @@ report = BrowsingReport()
 
 
 def start_browsing():
+    """Set number of pages browsed at a time to 1 and reach next records page according to the determined current page.
+
+    If current page is start page, clicks 'Szukaj' (Search) button to reach first records page.
+    If current page is records page, do nothing (let do_browsing() overtake).
+    """
+    report.write_report(set_strony)
     start_point = report.write_report(determine_startpoint)
     if start_point == 1:
         report.write_report(click_status_and_search)
@@ -22,8 +34,18 @@ def start_browsing():
 
 
 def do_browsing(number_of_pages):
+    """Browse number of result pages chosen by user and print log with page number and downloads counters after each.
+
+    This function calls nested function browse_one_page() in a loop, which amounts to specified number of pages.
+    It prints page number before browsing each page and count of new items together with running total after each page.
+
+    Parameters
+    ----------
+    number_of_pages (int): Specifies how many pages should be browsed.
+    """
 
     def browse_one_page():
+        """Browse one result page and return count of items downloaded per page."""
         report.write_report(await_blueline)
         report.write_report(actively_check_list_site)
         report.write_report(click_start)
