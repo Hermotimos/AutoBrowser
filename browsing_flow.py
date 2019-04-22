@@ -61,9 +61,13 @@ def do_browsing(number_of_pages):
 
     for page in pages_to_browse:
         print('{}'.format(page))
+        report.write_report_info(f'\n{str(page)}\n')
+
         new_per_page = browse_one_page()
         new_sum_total += new_per_page
-        print('\t' * 12, '+{}/[{}]'.format(new_per_page, new_sum_total))
+
+        print('{}+{}/[{}]'.format('\t' * 11, new_per_page, new_sum_total))
+        report.write_report_info('\n{}+{}/[{}]'.format('\t' * 5, new_per_page, new_sum_total))
 
 
 def create_browsing_report():

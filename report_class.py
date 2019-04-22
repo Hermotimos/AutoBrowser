@@ -16,6 +16,9 @@ class BrowsingReport:
         """Create object of BrowsingReport with attribute 'report' as empty str."""
         self.report = ''
 
+    def write_report_info(self, line):
+        self.report += line
+
     def write_report(self, called_function):
         """For every function passed to this method write info to report attribute and print out log.
 
@@ -49,7 +52,7 @@ class BrowsingReport:
         print(back_n_times, end='')
 
         elapsed = '\t{:-3}s\t'.format(round(time.time() - timer))
-        self.report += elapsed
+        self.report += elapsed + '\n'
         print(elapsed)
 
         return returned_value
