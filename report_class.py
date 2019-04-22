@@ -6,13 +6,31 @@ import time
 
 
 class BrowsingReport:
+    """
+    Its objects may serve as logs printed out during program execution and/or as reports printed out afterwards.
+    write_report(): serves as log
+    __repr__(): serves as report, is dependant from write_report()
+    """
+
     def __init__(self):
+        """Create object of BrowsingReport with attribute 'report' as empty str."""
         self.report = ''
 
-    def __repr__(self):
-        return self.report
-
     def write_report(self, called_function):
+        """For every function passed to this method write info to report attribute and print out log.
+
+        For each function called as attribute of this method following data will be printed into log:
+        - execution starting time
+        - function name
+        - execution time
+        Same data is written into report attribute.
+
+        Example
+        -------
+            [20:24:47] determine_startpoint     	  5s
+            [20:24:52] click_status_and_search  	  8s
+            [20:25:00] set_strony               	  3s
+        """
         timer = time.time()
 
         start_time = '[{}] '.format(time.strftime('%H:%M:%S'))
@@ -35,3 +53,7 @@ class BrowsingReport:
         print(elapsed)
 
         return returned_value
+
+    def __repr__(self):
+        """Return whole object."""
+        return self.report
