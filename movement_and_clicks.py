@@ -9,22 +9,20 @@ There are two functions in browsing_flow.py that use functions from this module:
 
 1) start_browsing() uses following functions:
 
-determine_startpoint():
-click_status_and_search():
-set_strony():
+determine_startpoint(): Returns number representing detected current page.
+click_status_and_search(): Clicks 'Szukaj' button on main page.
+set_strony(): Sets number of pages to be browsed for downloading.
 
 
 2) do_browsing() uses following functions:
 
-await_blueline():
-click_start():
-switch_window_when_done():
-click_back_n_times():
-actively_check_list_site():
-click_next():
-
+await_blueline(): Holds program until records page is loaded.
+click_start(): Clicks 'Start' button to initiate download.
+switch_window_when_done(): Goes back to search engine after download is finished.
+click_back_n_times(): Goes back n time, where n = 1 + number of pages opened during download.
+actively_check_list_site(): Checks if current page is records page.
+click_next(): Goes to next page of records.
 """
-
 
 import sys
 import pyautogui
@@ -67,7 +65,7 @@ def determine_startpoint():
 
 
 def click_status_and_search():
-    """Click location 'Status' on starting page, scroll down and click 'Szukaj'."""
+    """Click location 'Status' on main page, scroll down and click 'Szukaj'."""
     try_click_image(IMG_STATUS)
     pyautogui.scroll(-7000)
     try_click_image(IMG_SZUKAJ)
@@ -90,7 +88,7 @@ def set_strony():
 def await_blueline():
     """Wait until blue line indicating list of records is visible.
 
-    This function ensures that program stops until another page of records is loaded.
+    This function ensures that program pauses until another page of records is loaded.
     Recognition is based on the presence of blue line characteristic of the record page.
     The line can come in two shades, of which one is more common.
     Waiting time for loading is set to 60 secs, if the first variant is absent, checks second variant in 1 sec.
