@@ -34,12 +34,11 @@ def recognize_number():
     If image wasn't recognized returns 0.
     This allows click_back_n_times() in browsing_flow.py to perform in a minimalistic way, which may be then corrected.
     """
-    recognized = 0
+    unrecognized = 0
     for num, image in enumerate(NOWE_ALL):
         if pyautogui.locateOnScreen(image):
-            recognized = num
-            break
-    return recognized
+            return num
+    return unrecognized
 
 
 def try_click_image(image_file, clicks=1, interval=0.0):
