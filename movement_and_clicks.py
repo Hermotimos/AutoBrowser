@@ -105,7 +105,6 @@ def click_start():
     """Click 'Start' button to start downloading results.
 
     Waits 30 secs until 'Start' button is visible in inactive mode (black) and clicks it.
-
     If the button is not visible after 30 secs, clicks 'back' button, as this usually unfreezes page hung by loading.
     Then function recursively calls itself.
 
