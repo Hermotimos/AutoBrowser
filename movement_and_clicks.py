@@ -97,16 +97,11 @@ def await_blueline():
     This function ensures that program pauses until another results page is loaded.
     Recognition is based on the presence of blue line characteristic of the results page.
     The line can come in two shades, of which one is more common.
-    Waiting time for loading is set to 60 secs, if the first variant is absent, checks second variant in 1 sec.
 
     If neither of blue line variants is visible, clicks 'back' button, as this usually unfreezes page hung by loading.
     """
-    time.sleep(1)
-    if pyautogui.locateOnScreen(IMG_BLUELINE, 15):
-        pass
-    elif pyautogui.locateOnScreen(IMG_BLUELINE_2, 15):
-        pass
-    else:
+    time.sleep(2)
+    if not (pyautogui.locateOnScreen(IMG_BLUELINE, 10) or pyautogui.locateOnScreen(IMG_BLUELINE_2, 10)):
         try_click_image(IMG_BACK)
 
 
