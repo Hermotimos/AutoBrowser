@@ -8,20 +8,18 @@ These reactions are building blocks of browsing_flow.py.
 There are two functions in browsing_flow.py that use functions from this module:
 
 1) start_browsing() uses following functions:
-
-determine_startpoint(): Returns number representing detected current page.
-click_status_and_search(): Clicks 'Szukaj' button on start page.
-set_strony(): Sets number of pages to be browsed for downloading.
+    determine_startpoint():     Returns number representing detected current page.
+    click_status_and_search():  Clicks 'Szukaj' button on start page.
+    set_strony():               Sets number of pages to be browsed for downloading.
 
 
 2) do_browsing() uses following functions:
-
-await_blueline(): Holds program until results page is loaded.
-click_start(): Clicks 'Start' button to initiate download.
-switch_window_when_done(): Goes back to search engine after download is finished.
-click_back_n_times(): Goes back n time, where n = 1 + number of pages opened during download.
-actively_check_list_site(): Checks if current page is results page.
-click_next(): Goes to next results page.
+    await_blueline():           Holds program until results page is loaded.
+    click_start():              Clicks 'Start' button to initiate download.
+    switch_window_when_done():  Goes back to search engine after download is finished.
+    click_back_n_times():       Goes back n time, where n = 1 + number of pages opened during download.
+    actively_check_list_site(): Checks if current page is results page.
+    click_next():               Goes to next results page.
 """
 
 import sys
