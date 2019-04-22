@@ -10,7 +10,8 @@ Firstly, browsing is started either from main page or from any result page.
 One page is browsed at a time with possible 0-10 downloads.
 """
 
-import time
+import os
+import datetime
 import pyautogui
 from report_class import BrowsingReport
 from movement_and_clicks import determine_startpoint, click_status_and_search, set_strony, \
@@ -65,9 +66,15 @@ def do_browsing(number_of_pages):
         print('\t' * 12, '+{}/[{}]'.format(new_per_page, new_sum_total))
 
 
-def finish_browsing():
-    last_page = pyautogui.screenshot()
-    last_page.save('.\\reports\\recent__{}.jpg'.format(time.strftime('%H.%M')))
+def create_browsing_report():
+    """Create directory 'reports' if doesn't exist, save screen shot and browsing report to files."""
+    if 'reports' not in os.listdir('.') or not os.path.isdir('reports'):
+        os.mkdir('reports')
+    now = datetime.datetime.now().strftime('%Y.%m.%d_%H.%M')
 
-    # todo create dir if not exists
-    # todo write report to file
+    last_page = pyautogui.screenshot()
+    last_page.save(f'.\\reports\\{now}__screenshot.jpg')
+
+    report_file = open(f'.\\reports\\{now}__report.txt', mode='w')
+    report_file.write(report.__repr__())
+
