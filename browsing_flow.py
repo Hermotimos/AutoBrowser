@@ -8,6 +8,9 @@ This is achieved in main.py module by calling following 3 functions consecutivel
 
 Firstly, browsing is started either from main page or from any result page.
 One page is browsed at a time with possible 0-10 downloads.
+
+All actions of browsing flow are performed within report_function() and report_non_function() methods of BrowsingReport
+so that they are printed out as log and added to 'report' instance of BrowsingReport created in this module.
 """
 
 import os
@@ -60,13 +63,9 @@ def do_browsing(number_of_pages):
     new_sum_total = 0
 
     for page in pages_to_browse:
-        print('{}'.format(page))
         report.report_non_function(f'\n{str(page)}\n')
-
         new_per_page = browse_one_page()
         new_sum_total += new_per_page
-
-        print('{}+{}/[{}]'.format('\t' * 11, new_per_page, new_sum_total))
         report.report_non_function('\n{}+{}/[{}]'.format('\t' * 5, new_per_page, new_sum_total))
 
 

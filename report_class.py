@@ -14,10 +14,12 @@ class BrowsingReport:
 
     def __init__(self):
         """Create object of BrowsingReport with attribute 'report' as empty str."""
-        self.report = ''
+        self.session_report = ''
 
     def report_non_function(self, line):
-        self.report += line
+        """Add any line passed as argument to report and print to log."""
+        self.session_report += line
+        print(line, end='')
 
     def report_function(self, called_function):
         """For every function passed to this method write info to report attribute and print out log.
@@ -33,30 +35,31 @@ class BrowsingReport:
             [20:24:47] determine_startpoint     	  5s
             [20:24:52] click_status_and_search  	  8s
             [20:25:00] set_strony               	  3s
+            (...)
         """
         timer = time.time()
 
         start_time = '[{}] '.format(time.strftime('%H:%M:%S'))
-        self.report += start_time
+        self.session_report += start_time
         print(start_time, end='')
 
         function_name = '{:25}'.format(called_function.__repr__().split()[1])
-        self.report += function_name
+        self.session_report += function_name
         print(function_name, end='')
 
         back_n_times = ''
         returned_value = called_function()
         if 'click_back_n_times' in function_name:
             back_n_times = '{:3}'.format(str(1 + returned_value) + 'x')
-        self.report += back_n_times
+        self.session_report += back_n_times
         print(back_n_times, end='')
 
         elapsed = '\t{:-3}s\t'.format(round(time.time() - timer))
-        self.report += elapsed + '\n'
+        self.session_report += elapsed + '\n'
         print(elapsed)
 
         return returned_value
 
     def __repr__(self):
         """Return whole object."""
-        return self.report
+        return self.session_report
