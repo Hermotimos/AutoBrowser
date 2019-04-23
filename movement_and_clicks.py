@@ -93,7 +93,8 @@ def set_strony():
 def await_blueline():
     """Wait untill blue line (one of 2 possible shades) indicating list of results is visible. If not, click 'go back'.
 
-    If neither of blue line variants is visible, clicks 'back' button, as this usually unfreezes page hung by loading.
+    If neither of blue line variants is visible, clicks 'back' button, as this usually unfreezes page hung by loading,
+    and then click 'next' again.
     """
     if not (pyautogui.locateOnScreen(IMG_BLUELINE, 10) or pyautogui.locateOnScreen(IMG_BLUELINE_2, 10)):
         try_click_image(IMG_BACK)
