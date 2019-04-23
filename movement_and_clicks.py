@@ -24,7 +24,6 @@ There are two functions in browsing_flow.py that use functions from this module:
 
 import sys
 import pyautogui
-import time
 from image_processing import try_click_image, recognize_number
 
 sys.setrecursionlimit(100)
@@ -96,9 +95,9 @@ def await_blueline():
 
     If neither of blue line variants is visible, clicks 'back' button, as this usually unfreezes page hung by loading.
     """
-    time.sleep(2)
     if not (pyautogui.locateOnScreen(IMG_BLUELINE, 10) or pyautogui.locateOnScreen(IMG_BLUELINE_2, 10)):
         try_click_image(IMG_BACK)
+        click_next()
 
 
 def click_start():
