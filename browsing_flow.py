@@ -38,7 +38,7 @@ def main_flow(num_pages=0, shutdown=None):
     Raises
     ------
     In case of RecursionError within any of lower modules functions, recalibration is performed.
-        This is a save measure - this means that program goes back to start_browsing() phase to possibly unfreeze the page.
+        This is a save measure: program goes back to start_browsing() phase to possibly unfreeze the page.
     In case of FailSafeException the action is included into report and program terminates.
 
     Todo: num_pages should be class so that it's modified and if passed down in case recalibration, it's modified value
@@ -154,4 +154,3 @@ def create_browsing_report():
 
     report_file = open(f'.\\reports\\{now}__report.txt', mode='w')
     report_file.write(report.__repr__())
-
