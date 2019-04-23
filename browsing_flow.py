@@ -23,6 +23,48 @@ from movement_and_clicks import determine_startpoint, click_status_and_search, s
 report = BrowsingReport()
 
 
+def main_flow(num_pages=0, shutdown=None):
+    if num_pages == 0:
+        num_pages = ask_number_pages()
+    if shutdown is None:
+        shutdown = ask_shutdown()
+
+    try:
+        start_browsing()
+        do_browsing(num_pages)
+    except RecursionError:
+        print('\nPROGRAM RECALIBRATION')
+        main_flow(num_pages, shutdown)
+    except pyautogui.FailSafeException:
+        now = datetime.datetime.now().strftime('%H:%M:%S')
+        print('\n[{}] FAILSAFE-ESCAPED.'.format(now))
+        report.report_non_function('\n[{}] FAILSAFE-ESCAPED.'.format(now))
+    finally:
+        create_browsing_report()
+        os.system("{}".format(shutdown))
+
+
+def ask_number_pages():
+    num = input('Enter number of pages to browse and confirm by ENTER:\n')
+    try:
+        num = int(num)
+        assert num > 0
+        return num
+    except Exception as e:
+        print('ERROR:', e)
+        return ask_number_pages()
+
+
+def ask_shutdown():
+    choice = input("Choose shutdown mode after program finishes:\nshutdown - s\nhibernation - h\nnone - any key\n")
+    mode = ''
+    if choice == 's':
+        mode = "shutdown /s /t 1"
+    elif choice == 'h':
+        mode = "shutdown /h"
+    return mode
+
+
 def start_browsing():
     """Set number of pages browsed at a time to 1 and reach next records page according to the determined current page.
 

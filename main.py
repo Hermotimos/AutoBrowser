@@ -1,27 +1,3 @@
-import os
-import pyautogui
-import datetime
-from browsing_flow import start_browsing, do_browsing, create_browsing_report
-from settings import ask_number_pages, ask_shutdown
+from browsing_flow import main_flow
 
-
-def main_flow(pages_to_browse):
-    num_pages = pages_to_browse
-
-    try:
-        start_browsing()
-        do_browsing(num_pages)
-        create_browsing_report()
-    except RecursionError:
-        print('\nPROGRAM RECALIBRATION')
-        main_flow(num_pages)
-    except pyautogui.FailSafeException:
-        now = datetime.datetime.now().strftime('%H:%M:%S')
-        print('\n[{}] FAILSAFE-ESCAPED.'.format(now))
-
-
-pages = ask_number_pages()
-ifshut = ask_shutdown()
-
-main_flow(pages)
-os.system("{}".format(ifshut))
+main_flow()
