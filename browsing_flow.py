@@ -12,16 +12,6 @@ Step 2: Performing browsing.
     start_browsing():           Goes to first or next records page.
     do_browsing():              Browses number of pages defined by user.
     create_browsing_report():   Saves screen shot and report to files in 'reports' directory.
-
-    All actions of Step 2 are performed within report_function() and report_non_function() methods of BrowsingReport
-    so that they are printed out as log and added to 'report' instance of BrowsingReport created in this module.
-
-    Firstly, browsing is started either from main page or from any result page.
-    Secondly, one page is browsed at a time with possible 0-10 downloads until limit set by user is reached.
-    Thirdly, a screen shot and a report are saved into 'reports' directory.
-
-    In case of RecursionError within any of lower modules functions, recalibration is performed.
-    This is a save measure - this means that program goes back to start_browsing() phase and possibly unfreeze the page.
 """
 
 import os
@@ -35,6 +25,30 @@ report = BrowsingReport()
 
 
 def main_flow(num_pages=0, shutdown=None):
+    """Perform browsing flow.
+
+    Asks user number of pages and shutdown mode, then follows to browsing.
+    Firstly, browsing is started either from main page or from any result page; result page is reached.
+    Secondly, one page is browsed at a time with possible 0-10 downloads until page limit set by user is reached.
+    Thirdly, a screen shot and a report are saved into 'reports' directory and system is shut down if requested.
+
+    All actions of Step 2 are performed within report_function() and report_non_function() methods of BrowsingReport
+    so that they are printed out as log and added to 'report' instance of BrowsingReport created in this module.
+
+    Raises
+    ------
+    In case of RecursionError within any of lower modules functions, recalibration is performed.
+        This is a save measure - this means that program goes back to start_browsing() phase to possibly unfreeze the page.
+    In case of FailSafeException the action is included into report and program terminates.
+
+    Todo: num_pages should be class so that it's modified and if passed down in case recalibration, it's modified value
+          is passed down.
+
+    Parameters
+    ----------
+    num_pages (int): Received via user input when main_flow() is called first time; then passed down by recursive calls.
+    shutdown (str): Received via user input when main_flow() is called first time; then passed down by recursive calls.
+    """
     if num_pages == 0:
         num_pages = ask_number_pages()
     if shutdown is None:
@@ -56,6 +70,7 @@ def main_flow(num_pages=0, shutdown=None):
 
 
 def ask_number_pages():
+    """Ask user for number of pages to browse. If provided number is invalid, ask recursively. Return input as int."""
     num = input('Enter number of pages to browse and confirm by ENTER:\n')
     try:
         num = int(num)
@@ -67,6 +82,12 @@ def ask_number_pages():
 
 
 def ask_shutdown():
+    """Ask user if they want to shut down system after program ends. Return cmd command as str accordingly.
+
+    Returns
+    -------
+        str: Returns str that is used as cmd command for shutdown. If user's input is not 's' or 'h', then empty str.
+    """
     choice = input("Choose shutdown mode after program finishes:\nshutdown - s\nhibernation - h\nnone - any key\n")
     mode = ''
     if choice == 's':
