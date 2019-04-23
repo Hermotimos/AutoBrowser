@@ -1,16 +1,27 @@
 """
 This module defines functions for browsing flow.
 
-This is achieved in main.py module by calling following 3 functions consecutively:
+This is achieved in 2 steps in main() function:
+
+Step 1: Determining modalities.
+    ask_number_pages(): Asks for user input to determine number of pages to browse.
+    ask_shutdown(): Asks for user input to determine, whether system should be shut down or hibernated after completion.
+
+Step 2: Performing browsing.
+    Following 3 functions are called consecutively:
     start_browsing():           Goes to first or next records page.
     do_browsing():              Browses number of pages defined by user.
     create_browsing_report():   Saves screen shot and report to files in 'reports' directory.
 
-Firstly, browsing is started either from main page or from any result page.
-One page is browsed at a time with possible 0-10 downloads.
+    All actions of Step 2 are performed within report_function() and report_non_function() methods of BrowsingReport
+    so that they are printed out as log and added to 'report' instance of BrowsingReport created in this module.
 
-All actions of browsing flow are performed within report_function() and report_non_function() methods of BrowsingReport
-so that they are printed out as log and added to 'report' instance of BrowsingReport created in this module.
+    Firstly, browsing is started either from main page or from any result page.
+    Secondly, one page is browsed at a time with possible 0-10 downloads until limit set by user is reached.
+    Thirdly, a screen shot and a report are saved into 'reports' directory.
+
+    In case of RecursionError within any of lower modules functions, recalibration is performed.
+    This is a save measure - this means that program goes back to start_browsing() phase and possibly unfreeze the page.
 """
 
 import os
