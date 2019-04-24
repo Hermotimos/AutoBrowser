@@ -12,6 +12,10 @@ Step 2: Performing browsing.
     start_browsing():           Goes to first or next records page.
     do_browsing():              Browses number of pages defined by user.
     create_browsing_report():   Saves screen shot and report to files in 'reports' directory.
+
+Todo
+    Create global variable page_cnt => pages_to_browse should equal initial number minus page_cnt
+    (to avoid reset by recalibration)
 """
 
 import os
