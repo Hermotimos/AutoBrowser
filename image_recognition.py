@@ -38,7 +38,7 @@ def recognize_number():
     """
     unrecognized = 0
     for num, image in enumerate(NOWE_ALL):
-        if pyautogui.locateOnScreen(image, grayscale=True, region=(0, 0, 0.5*width, 0.3*height)):
+        if pyautogui.locateOnScreen(image, grayscale=True, region=(0, 0, 0.5 * width, 0.3 * height)):
             return num
     return unrecognized
 
