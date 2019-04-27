@@ -36,12 +36,12 @@ IMG_LISTA = '.\\images\\IMG_LISTA.png'
 IMG_STATUS = '.\\images\\IMG_STATUS.png'
 IMG_SZUKAJ = '.\\images\\IMG_SZUKAJ.png'
 IMG_NROSTAT = '.\\images\\IMG_NROSTAT.png'
-IMG_BLUELINE = '.\\images\\IMG_BLUELINE.png'
+IMG_BLUELINE_1 = '.\\images\\IMG_BLUELINE_1.png'
 IMG_BLUELINE_2 = '.\\images\\IMG_BLUELINE_2.png'
 IMG_BACK = '.\\images\\IMG_BACK.png'
 IMG_START_BLACK = '.\\images\\IMG_START_BLACK.png'
 IMG_NOWE_DONE = '.\\images\\IMG_NOWE_DONE.png'
-IMG_WYSZUKIWARKA = '.\\images\\IMG_WYSZUKIWARKA.png'
+IMG_WYSZUKIWARKA_1 = '.\\images\\IMG_WYSZUKIWARKA_1.png'
 IMG_WYSZUKIWARKA_2 = '.\\images\\IMG_WYSZUKIWARKA_2.png'
 IMG_NASTEPNA_1 = '.\\images\\IMG_NASTEPNA_1.png'
 IMG_NASTEPNA_2 = '.\\images\\IMG_NASTEPNA_2.png'
@@ -99,7 +99,7 @@ def await_blueline():
     If neither of blue line variants is visible, clicks 'back' button, as this usually unfreezes page hung by loading,
     and then click 'next' again.
     """
-    if not (pyautogui.locateOnScreen(IMG_BLUELINE, 10, grayscale=True)
+    if not (pyautogui.locateOnScreen(IMG_BLUELINE_1, 10, grayscale=True)
             or pyautogui.locateOnScreen(IMG_BLUELINE_2, 10, grayscale=True)):
         try_click_image(IMG_BACK)
         click_next()
@@ -135,7 +135,7 @@ def switch_window_when_done():
         If recursion limit is exhausted RecursionError is raised. This enables main.py module to recalibrate program.
     """
     if pyautogui.locateOnScreen(IMG_NOWE_DONE, 20, grayscale=True):
-        try_click_image(IMG_WYSZUKIWARKA)
+        try_click_image(IMG_WYSZUKIWARKA_1)
         # region kwarg not specified, because it catches the moment between signatures and fires too soon
     elif pyautogui.locateOnScreen(IMG_WYSZUKIWARKA_2, 1, grayscale=True, region=(0, 0, 0.5*width, 0.5*height)):
         try_click_image(IMG_WYSZUKIWARKA_2)
