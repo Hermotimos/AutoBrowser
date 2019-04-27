@@ -43,8 +43,9 @@ IMG_START_BLACK = '.\\images\\IMG_START_BLACK.png'
 IMG_NOWE_DONE = '.\\images\\IMG_NOWE_DONE.png'
 IMG_WYSZUKIWARKA = '.\\images\\IMG_WYSZUKIWARKA.png'
 IMG_WYSZUKIWARKA_2 = '.\\images\\IMG_WYSZUKIWARKA_2.png'
-IMG_NASTEPNA = '.\\images\\IMG_NASTEPNA.png'
+IMG_NASTEPNA_1 = '.\\images\\IMG_NASTEPNA_1.png'
 IMG_NASTEPNA_2 = '.\\images\\IMG_NASTEPNA_2.png'
+IMG_NASTEPNA_3 = '.\\images\\IMG_NASTEPNA_3.png'
 
 
 # ELEMENTS OF start_browsing()
@@ -63,7 +64,7 @@ def determine_startpoint():
     if pyautogui.locateOnScreen(IMG_STATUS, 1, grayscale=True, region=(0, 0, 0.5*width, height)):
         return 1
     elif pyautogui.locateOnScreen(IMG_LISTA, 1, region=(0, 0, 0.5*width, 0.3*height)) \
-            or pyautogui.locateOnScreen(IMG_NASTEPNA, 1, grayscale=True, region=(0, 0.5*height, width, height)) \
+            or pyautogui.locateOnScreen(IMG_NASTEPNA_1, 1, grayscale=True, region=(0, 0.5 * height, width, height)) \
             or pyautogui.locateOnScreen(IMG_NASTEPNA_2, 1, grayscale=True, region=(0, 0.5*height, width, height)):
         return 2
     else:
@@ -191,8 +192,8 @@ def click_next():
         If recursion limit is exhausted RecursionError is raised. This enables main.py module to recalibrate program.
     """
     pyautogui.scroll(-7000)
-    if pyautogui.locateOnScreen(IMG_NASTEPNA, 2, grayscale=True, region=(0, 0.5*height, width, height)):
-        try_click_image(IMG_NASTEPNA)
+    if pyautogui.locateOnScreen(IMG_NASTEPNA_1, 2, grayscale=True, region=(0, 0.5 * height, width, height)):
+        try_click_image(IMG_NASTEPNA_1)
     elif pyautogui.locateOnScreen(IMG_NASTEPNA_2, 2, grayscale=True, region=(0, 0.5*height, width, height)):
         try_click_image(IMG_NASTEPNA_2)
     else:
