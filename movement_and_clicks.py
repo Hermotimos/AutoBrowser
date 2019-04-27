@@ -24,7 +24,7 @@ There are two functions in browsing_flow.py that use functions from this module:
 
 import sys
 import pyautogui
-from image_processing import try_click_image, recognize_number
+from image_recognition import try_click_image, recognize_number
 
 sys.setrecursionlimit(100)
 pyautogui.PAUSE = 0.5
