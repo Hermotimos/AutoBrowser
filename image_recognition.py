@@ -36,7 +36,7 @@ def recognize_number():
     """
     unrecognized = 0
     for num, image in enumerate(NOWE_ALL):
-        if pyautogui.locateOnScreen(image):
+        if pyautogui.locateOnScreen(image, grayscale=True):
             return num
     return unrecognized
 
@@ -73,6 +73,6 @@ def click_image(image_file, clicks, interval):
     ------
         If image is not recognized on screen TypeError is raised. This is handled by try_click_image().
     """
-    location = pyautogui.locateOnScreen(image_file)
+    location = pyautogui.locateOnScreen(image_file, grayscale=True)
     center = pyautogui.center(location)
     pyautogui.click(center[0], center[1], clicks=clicks, interval=interval, duration=0.5)

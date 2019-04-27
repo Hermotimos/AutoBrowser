@@ -58,11 +58,11 @@ def determine_startpoint():
     ------
         If recursion limit is exhausted RecursionError is raised. This enables main.py module to recalibrate program.
     """
-    if pyautogui.locateOnScreen(IMG_STATUS, 1):
+    if pyautogui.locateOnScreen(IMG_STATUS, 1, grayscale=True):
         return 1
     elif pyautogui.locateOnScreen(IMG_LISTA, 1) \
-            or pyautogui.locateOnScreen(IMG_NASTEPNA, 1) \
-            or pyautogui.locateOnScreen(IMG_NASTEPNA_2, 1):
+            or pyautogui.locateOnScreen(IMG_NASTEPNA, 1, grayscale=True) \
+            or pyautogui.locateOnScreen(IMG_NASTEPNA_2, 1, grayscale=True):
         return 2
     else:
         pyautogui.scroll(7000)
@@ -96,7 +96,8 @@ def await_blueline():
     If neither of blue line variants is visible, clicks 'back' button, as this usually unfreezes page hung by loading,
     and then click 'next' again.
     """
-    if not (pyautogui.locateOnScreen(IMG_BLUELINE, 10) or pyautogui.locateOnScreen(IMG_BLUELINE_2, 10)):
+    if not (pyautogui.locateOnScreen(IMG_BLUELINE, 10, grayscale=True)
+            or pyautogui.locateOnScreen(IMG_BLUELINE_2, 10, grayscale=True)):
         try_click_image(IMG_BACK)
         click_next()
 
@@ -112,7 +113,7 @@ def click_start():
     ------
         If recursion limit is exhausted RecursionError is raised. This enables main.py module to recalibrate program.
     """
-    if pyautogui.locateOnScreen(IMG_START_BLACK, 30):
+    if pyautogui.locateOnScreen(IMG_START_BLACK, 30, grayscale=True):
         try_click_image(IMG_START_BLACK)
     else:
         try_click_image(IMG_BACK)
@@ -130,9 +131,9 @@ def switch_window_when_done():
     ------
         If recursion limit is exhausted RecursionError is raised. This enables main.py module to recalibrate program.
     """
-    if pyautogui.locateOnScreen(IMG_NOWE_DONE, 20):
+    if pyautogui.locateOnScreen(IMG_NOWE_DONE, 20, grayscale=True):
         try_click_image(IMG_WYSZUKIWARKA)
-    elif pyautogui.locateOnScreen(IMG_WYSZUKIWARKA_2, 1):
+    elif pyautogui.locateOnScreen(IMG_WYSZUKIWARKA_2, 1, grayscale=True):
         try_click_image(IMG_WYSZUKIWARKA_2)
     else:
         switch_window_when_done()
@@ -166,7 +167,7 @@ def actively_check_list_site():
     ------
         If recursion limit is exhausted RecursionError is raised. This enables main.py module to recalibrate program.
     """
-    if pyautogui.locateOnScreen(IMG_LISTA, 15):
+    if pyautogui.locateOnScreen(IMG_LISTA, 15, grayscale=True):
         try_click_image(IMG_LISTA)
     else:
         try_click_image(IMG_BACK)
@@ -187,9 +188,9 @@ def click_next():
         If recursion limit is exhausted RecursionError is raised. This enables main.py module to recalibrate program.
     """
     pyautogui.scroll(-7000)
-    if pyautogui.locateOnScreen(IMG_NASTEPNA, 2):
+    if pyautogui.locateOnScreen(IMG_NASTEPNA, 2, grayscale=True):
         try_click_image(IMG_NASTEPNA)
-    elif pyautogui.locateOnScreen(IMG_NASTEPNA_2, 2):
+    elif pyautogui.locateOnScreen(IMG_NASTEPNA_2, 2, grayscale=True):
         try_click_image(IMG_NASTEPNA_2)
     else:
         click_next()
