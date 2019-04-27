@@ -194,7 +194,9 @@ def click_next():
     pyautogui.scroll(-7000)
     if pyautogui.locateOnScreen(IMG_NASTEPNA_1, 2, grayscale=True, region=(0, 0.5 * height, width, height)):
         try_click_image(IMG_NASTEPNA_1)
-    elif pyautogui.locateOnScreen(IMG_NASTEPNA_2, 2, grayscale=True, region=(0, 0.5*height, width, height)):
+    elif pyautogui.locateOnScreen(IMG_NASTEPNA_2, 2, grayscale=True, region=(0, 0.5 * height, width, height)):
         try_click_image(IMG_NASTEPNA_2)
+    elif pyautogui.locateOnScreen(IMG_NASTEPNA_3, 2, grayscale=True, region=(0, 0.5 * height, width, height)):
+        try_click_image(IMG_NASTEPNA_3)
     else:
         click_next()
