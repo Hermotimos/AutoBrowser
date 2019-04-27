@@ -14,6 +14,8 @@ import pyautogui
 
 sys.setrecursionlimit(100)
 
+width, height = pyautogui.size()
+
 NOWE_0 = '.\\images\\nowe_0.png'
 NOWE_1 = '.\\images\\nowe_1.png'
 NOWE_2 = '.\\images\\nowe_2.png'
@@ -36,7 +38,7 @@ def recognize_number():
     """
     unrecognized = 0
     for num, image in enumerate(NOWE_ALL):
-        if pyautogui.locateOnScreen(image, grayscale=True):
+        if pyautogui.locateOnScreen(image, grayscale=True, region=(0, 0, 0.5*width, 0.3*height)):
             return num
     return unrecognized
 
