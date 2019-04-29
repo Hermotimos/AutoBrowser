@@ -63,7 +63,7 @@ def main_flow(num_pages=0, shutdown=None):
         do_browsing(num_pages)
     except RecursionError:
         print('\nPROGRAM RECALIBRATION')
-        main_flow(num_pages, shutdown)
+        do_browsing(num_pages)                      # Experimentally
     except pyautogui.FailSafeException:
         now = datetime.datetime.now().strftime('%H:%M:%S')
         print('\n[{}] FAILSAFE-ESCAPED.'.format(now))
@@ -108,6 +108,7 @@ def start_browsing():
     If current page is records page, do nothing (let do_browsing() overtake).
     """
     report.report_function(set_strony)
+    report.report_function(click_back_n_times())
     start_point = report.report_function(determine_startpoint)
     if start_point == 1:
         report.report_function(click_status_and_search)
