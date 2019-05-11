@@ -49,6 +49,20 @@ IMG_NASTEPNA_3 = '.\\images\\IMG_NASTEPNA_3.png'
 
 
 # ELEMENTS OF start_browsing()
+
+def set_strony():
+    """Set number of pages browsed by downloading to 1.
+
+    Clicks at location 'numer ostatniej strony' and moves 20 pixels beneath to the combo box.
+    Activates the box, deletes whatever is in it and types '1' to ensure browsing of 1 page at a time.
+    """
+    try_click_image(IMG_NROSTAT)
+    pyautogui.move(0, 20)
+    pyautogui.click()
+    pyautogui.press('delete', presses=5)
+    pyautogui.typewrite('1')
+
+
 def determine_startpoint():
     """Determine if current page is the start page or the records page. Return 1 or 2 accordingly.
 
@@ -79,30 +93,39 @@ def click_status_and_search():
     try_click_image(IMG_SZUKAJ)
 
 
-def set_strony():
-    """Set number of pages browsed by downloading to 1.
-
-    Clicks at location 'numer ostatniej strony' and moves 20 pixels beneath to the combo box.
-    Activates the box, deletes whatever is in it and types '1' to ensure browsing of 1 page at a time.
-    """
-    try_click_image(IMG_NROSTAT)
-    pyautogui.move(0, 20)
-    pyautogui.click()
-    pyautogui.press('delete', presses=5)
-    pyautogui.typewrite('1')
-
-
 # ELEMENTS of do_browsing()
-def await_blueline():
-    """Wait untill blue line (one of 2 possible shades) indicating list of results is visible. If not, click 'go back'.
 
-    If neither of blue line variants is visible, clicks 'back' button, as this usually unfreezes page hung by loading,
-    and then click 'next' again.
+
+# def await_blueline():
+#     """Wait untill blue line (one of 2 possible shades) indicating list of results is visible. If not, click 'go back'.
+#
+#     If neither of blue line variants is visible, clicks 'back' button, as this usually unfreezes page hung by loading,
+#     and then click 'next' again.
+#     """
+#     if not (pyautogui.locateOnScreen(IMG_BLUELINE_1, 10, grayscale=True)
+#             or pyautogui.locateOnScreen(IMG_BLUELINE_2, 10, grayscale=True)):
+#         try_click_image(IMG_BACK)
+#         click_next()
+
+
+def actively_check_list_site():
+    """Waits until results page is visible.
+
+    If the site is not visible after 15 secs, clicks 'back' button, as this usually unfreezes page hung by loading.
+    Then moves cursor beneath 'back' button and scrolls up in case it landed at the bottom of page.
+    Then function recursively calls itself.
+
+    Raises
+    ------
+        If recursion limit is exhausted RecursionError is raised. This enables main.py module to recalibrate program.
     """
-    if not (pyautogui.locateOnScreen(IMG_BLUELINE_1, 10, grayscale=True)
-            or pyautogui.locateOnScreen(IMG_BLUELINE_2, 10, grayscale=True)):
+    if pyautogui.locateOnScreen(IMG_LISTA, 15, grayscale=True, region=(0, 0, 0.5 * width, 0.3 * height)):
+        try_click_image(IMG_LISTA)
+    else:
         try_click_image(IMG_BACK)
-        click_next()
+        pyautogui.move(0, 30)
+        pyautogui.scroll(7000)
+        actively_check_list_site()
 
 
 def click_start():
@@ -158,26 +181,6 @@ def click_back_n_times():
     n_times = new + 1
     try_click_image(IMG_BACK, clicks=n_times, interval=0.5)
     return new
-
-
-def actively_check_list_site():
-    """Waits until results page is visible.
-
-    If the site is not visible after 15 secs, clicks 'back' button, as this usually unfreezes page hung by loading.
-    Then moves cursor beneath 'back' button and scrolls up in case it landed at the bottom of page.
-    Then function recursively calls itself.
-
-    Raises
-    ------
-        If recursion limit is exhausted RecursionError is raised. This enables main.py module to recalibrate program.
-    """
-    if pyautogui.locateOnScreen(IMG_LISTA, 15, grayscale=True, region=(0, 0, 0.5 * width, 0.3 * height)):
-        try_click_image(IMG_LISTA)
-    else:
-        try_click_image(IMG_BACK)
-        pyautogui.move(0, 30)
-        pyautogui.scroll(7000)
-        actively_check_list_site()
 
 
 def click_next():
