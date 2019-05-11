@@ -109,8 +109,7 @@ def start_browsing():
     If current page is records page, do nothing (let do_browsing() overtake).
     """
     report.report_function(set_strony)
-    start_point = report.report_function(determine_startpoint)
-    if start_point == 1:
+    if report.report_function(determine_startpoint) == 1:
         report.report_function(click_status_and_search)
     else:
         pass
