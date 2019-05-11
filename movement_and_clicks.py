@@ -55,14 +55,12 @@ def set_strony():
 
     Clicks at location 'numer ostatniej strony' and moves 20 pixels beneath to the combo box.
     Activates the box, deletes whatever is in it and types '1' to ensure browsing of 1 page at a time.
-    Then places cursor over the query formular.
     """
     try_click_image(IMG_NROSTAT)
     pyautogui.move(0, 20)
     pyautogui.click()
     pyautogui.press('delete', presses=5)
     pyautogui.typewrite('1')
-    pyautogui.move(0, 50)
 
 
 def determine_startpoint():
@@ -77,13 +75,13 @@ def determine_startpoint():
     ------
         If recursion limit is exhausted RecursionError is raised. This enables main.py module to recalibrate program.
     """
-    if pyautogui.locateOnScreen(IMG_STATUS, 1, grayscale=True, region=(0, 0, 0.5 * width, height)):
+    if pyautogui.locateOnScreen(IMG_STATUS, grayscale=True, region=(0, 0, 0.5 * width, height)):
         return 1
-    elif pyautogui.locateOnScreen(IMG_LISTA, 1, region=(0, 0, 0.5 * width, 0.3 * height)) \
-            or pyautogui.locateOnScreen(IMG_NASTEPNA_1, 1, grayscale=True, region=(0, 0.5 * height, width, height)) \
-            or pyautogui.locateOnScreen(IMG_NASTEPNA_2, 1, grayscale=True, region=(0, 0.5 * height, width, height)):
+    elif pyautogui.locateOnScreen(IMG_BLUELINE_1, grayscale=True) \
+            or pyautogui.locateOnScreen(IMG_BLUELINE_2, grayscale=True):
         return 2
     else:
+        pyautogui.move(0, 50)
         pyautogui.scroll(7000)
         determine_startpoint()
 
