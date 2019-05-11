@@ -16,10 +16,9 @@ class BrowsingReport:
         """Create object of BrowsingReport with attribute 'report' as empty str."""
         self.session_report = ''
 
-    def report_non_function(self, line):
-        """Add any line passed as argument to report and print to log."""
-        self.session_report += line
-        print(line, end='')
+    def __repr__(self):
+        """Return whole object."""
+        return self.session_report
 
     def report_function(self, called_function):
         """For every function passed to this method write info to report attribute and print out log.
@@ -37,29 +36,32 @@ class BrowsingReport:
             [20:25:00] set_strony               	  3s
             (...)
         """
-        timer = time.time()
+        if isinstance(func_or_str, str):
+            self.session_report += func_or_str
+            print(func_or_str, end='')
+        else:
+            function = func_or_str
+            timer = time.time()
 
-        start_time = '[{}] '.format(time.strftime('%H:%M:%S'))
-        self.session_report += start_time
-        print(start_time, end='')
+            start_time = '[{}] '.format(time.strftime('%H:%M:%S'))
+            self.session_report += start_time
+            print(start_time, end='')
 
-        function_name = '{:25}'.format(called_function.__repr__().split()[1])
-        self.session_report += function_name
-        print(function_name, end='')
+            function_name = '{:25}'.format(function.__repr__().split()[1])
+            self.session_report += function_name
+            print(function_name, end='')
 
-        back_n_times = ''
-        returned_value = called_function()
-        if 'click_back_n_times' in function_name:
-            back_n_times = '{:3}'.format(str(1 + returned_value) + 'x')
-        self.session_report += back_n_times
-        print(back_n_times, end='')
+            back_n_times = ''
+            returned_value = function()
+            if 'click_back_n_times' in function_name:
+                back_n_times = '{:3}'.format(str(1 + returned_value) + 'x')
+            self.session_report += back_n_times
+            print(back_n_times, end='')
 
-        elapsed = '\t{:-3}s\t'.format(round(time.time() - timer))
-        self.session_report += elapsed + '\n'
-        print(elapsed)
+            elapsed = '\t{:-3}s\t'.format(round(time.time() - timer))
+            self.session_report += elapsed + '\n'
+            print(elapsed)
 
-        return returned_value
+            return returned_value
 
-    def __repr__(self):
-        """Return whole object."""
-        return self.session_report
+
