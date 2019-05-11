@@ -5,20 +5,22 @@ Site features/events are represented by constants IMG_LISTA, IMG_STATUS etc., wh
 Functions in this module react to these features/events and their malfunctions.
 These reactions are building blocks of browsing_flow.py.
 
+All functions in this moduled are decorated with log_action() decorator to produce log and report.
+
 There are two functions in browsing_flow.py that use functions from this module:
 
 1) start_browsing() uses following functions:
+    set_strony():               Sets number of pages to be browsed for downloading.
     determine_startpoint():     Returns number representing detected current page.
     click_status_and_search():  Clicks 'Szukaj' button on start page.
-    set_strony():               Sets number of pages to be browsed for downloading.
+
 
 
 2) do_browsing() uses following functions:
-    await_blueline():           Holds program until results page is loaded.
+    actively_check_list_site(): Checks if current page is results page.
     click_start():              Clicks 'Start' button to initiate download.
     switch_window_when_done():  Goes back to search engine after download is finished.
     click_back_n_times():       Goes back n time, where n = 1 + number of pages opened during download.
-    actively_check_list_site(): Checks if current page is results page.
     click_next():               Goes to next results page.
 """
 
@@ -27,9 +29,9 @@ import pyautogui
 from image_recognition import try_click_image, recognize_number
 
 sys.setrecursionlimit(100)
+
 pyautogui.PAUSE = 0.5
 pyautogui.FAILSAFE = True
-
 width, height = pyautogui.size()
 
 IMG_LISTA = '.\\images\\IMG_LISTA.png'
@@ -49,35 +51,6 @@ IMG_NASTEPNA_3 = '.\\images\\IMG_NASTEPNA_3.png'
 
 
 # ELEMENTS OF start_browsing()
-def determine_startpoint():
-    """Determine if current page is the start page or the records page. Return 1 or 2 accordingly.
-
-    If neither can be determined function scrolls up and calls itself recursively.
-
-    Returns
-    -------
-        int: Value 1 for start page, value 2 for records page.
-    Raises
-    ------
-        If recursion limit is exhausted RecursionError is raised. This enables main.py module to recalibrate program.
-    """
-    if pyautogui.locateOnScreen(IMG_STATUS, 1, grayscale=True, region=(0, 0, 0.5 * width, height)):
-        return 1
-    elif pyautogui.locateOnScreen(IMG_LISTA, 1, region=(0, 0, 0.5 * width, 0.3 * height)) \
-            or pyautogui.locateOnScreen(IMG_NASTEPNA_1, 1, grayscale=True, region=(0, 0.5 * height, width, height)) \
-            or pyautogui.locateOnScreen(IMG_NASTEPNA_2, 1, grayscale=True, region=(0, 0.5 * height, width, height)):
-        return 2
-    else:
-        pyautogui.scroll(7000)
-        determine_startpoint()
-
-
-def click_status_and_search():
-    """Click location 'Status' on start page, scroll down and click 'Szukaj'."""
-    try_click_image(IMG_STATUS)
-    pyautogui.scroll(-7000)
-    try_click_image(IMG_SZUKAJ)
-
 
 def set_strony():
     """Set number of pages browsed by downloading to 1.
@@ -92,17 +65,58 @@ def set_strony():
     pyautogui.typewrite('1')
 
 
-# ELEMENTS of do_browsing()
-def await_blueline():
-    """Wait untill blue line (one of 2 possible shades) indicating list of results is visible. If not, click 'go back'.
+def determine_startpoint():
+    """Determine if current page is the start page or the records page. Return 1 or 2 accordingly.
 
-    If neither of blue line variants is visible, clicks 'back' button, as this usually unfreezes page hung by loading,
-    and then click 'next' again.
+    If neither can be determined function scrolls up and calls itself recursively.
+
+    Returns
+    -------
+        int: Value 1 for start page, value 2 for records page.
+    Raises
+    ------
+        If recursion limit is exhausted RecursionError is raised. This enables main.py module to recalibrate program.
     """
-    if not (pyautogui.locateOnScreen(IMG_BLUELINE_1, 10, grayscale=True)
-            or pyautogui.locateOnScreen(IMG_BLUELINE_2, 10, grayscale=True)):
-        try_click_image(IMG_BACK)
-        click_next()
+    if pyautogui.locateOnScreen(IMG_STATUS, grayscale=True, region=(0, 0, 0.5 * width, height)):
+        return 1
+    elif pyautogui.locateOnScreen(IMG_BLUELINE_1, grayscale=True) \
+            or pyautogui.locateOnScreen(IMG_BLUELINE_2, grayscale=True):
+        return 2
+    else:
+        pyautogui.move(0, 50)
+        pyautogui.scroll(7000)
+        determine_startpoint()
+
+
+def click_status_and_search():
+    """Click location 'Status' on start page, scroll down and click 'Szukaj'."""
+    try_click_image(IMG_STATUS)
+    pyautogui.scroll(-7000)
+    try_click_image(IMG_SZUKAJ)
+
+
+# ELEMENTS of do_browsing()
+
+def actively_check_list_site():
+    """Waits until results page is visible.
+
+    If the site is not visible after 15 secs, clicks 'back' button, as this usually unfreezes page hung by loading.
+    Then moves cursor beneath 'back' button and scrolls up in case it landed at the bottom of page.
+    Then function recursively calls itself.
+
+    Raises
+    ------
+        If recursion limit is exhausted RecursionError is raised. This enables main.py module to recalibrate program.
+    """
+    if pyautogui.locateOnScreen(IMG_LISTA, 15, grayscale=True, region=(0, 0, 0.5 * width, 0.3 * height)):
+        try_click_image(IMG_LISTA)
+    else:
+        pyautogui.move(0, 30)
+        pyautogui.scroll(7000)
+        if pyautogui.locateOnScreen(IMG_LISTA, 15, grayscale=True, region=(0, 0, 0.5 * width, 0.3 * height)):
+            try_click_image(IMG_LISTA)
+        else:
+            try_click_image(IMG_BACK)
 
 
 def click_start():
@@ -134,10 +148,10 @@ def switch_window_when_done():
     ------
         If recursion limit is exhausted RecursionError is raised. This enables main.py module to recalibrate program.
     """
-    if pyautogui.locateOnScreen(IMG_NOWE_DONE, 20, grayscale=True):
+    if pyautogui.locateOnScreen(IMG_NOWE_DONE, 10, grayscale=True):
         try_click_image(IMG_WYSZUKIWARKA_1)
         # region kwarg not specified, because it catches the moment between signatures and fires too soon
-    elif pyautogui.locateOnScreen(IMG_WYSZUKIWARKA_2, 1, grayscale=True, region=(0, 0, 0.5 * width, 0.5 * height)):
+    elif pyautogui.locateOnScreen(IMG_WYSZUKIWARKA_2, 10, grayscale=True, region=(0, 0, 0.5 * width, 0.5 * height)):
         try_click_image(IMG_WYSZUKIWARKA_2)
     else:
         switch_window_when_done()
@@ -158,26 +172,6 @@ def click_back_n_times():
     n_times = new + 1
     try_click_image(IMG_BACK, clicks=n_times, interval=0.5)
     return new
-
-
-def actively_check_list_site():
-    """Waits until results page is visible.
-
-    If the site is not visible after 15 secs, clicks 'back' button, as this usually unfreezes page hung by loading.
-    Then moves cursor beneath 'back' button and scrolls up in case it landed at the bottom of page.
-    Then function recursively calls itself.
-
-    Raises
-    ------
-        If recursion limit is exhausted RecursionError is raised. This enables main.py module to recalibrate program.
-    """
-    if pyautogui.locateOnScreen(IMG_LISTA, 15, grayscale=True, region=(0, 0, 0.5 * width, 0.3 * height)):
-        try_click_image(IMG_LISTA)
-    else:
-        try_click_image(IMG_BACK)
-        pyautogui.move(0, 30)
-        pyautogui.scroll(7000)
-        actively_check_list_site()
 
 
 def click_next():

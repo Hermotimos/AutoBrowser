@@ -22,10 +22,10 @@ import os
 import datetime
 import pyautogui
 from report_class import BrowsingReport
-from movement_and_clicks import determine_startpoint, click_status_and_search, set_strony, \
-                                   await_blueline, click_start, switch_window_when_done, click_back_n_times, \
-                                   actively_check_list_site, click_next
-report = BrowsingReport()
+from movement_and_clicks import determine_startpoint, click_status_and_search, set_strony, click_start, \
+                                switch_window_when_done, click_back_n_times, actively_check_list_site, click_next
+
+log = BrowsingReport()
 
 
 def main_flow(num_pages=0, shutdown=None):
@@ -36,8 +36,8 @@ def main_flow(num_pages=0, shutdown=None):
     Secondly, one page is browsed at a time with possible 0-10 downloads until page limit set by user is reached.
     Thirdly, a screen shot and a report are saved into 'reports' directory and system is shut down if requested.
 
-    All actions of Step 2 are performed within report_function() and report_non_function() methods of BrowsingReport
-    so that they are printed out as log and added to 'report' instance of BrowsingReport created in this module.
+    All actions of Step 2 are performed within report() and report_non_function() methods of BrowsingReport
+    so that they are printed out as log and added to 'log' instance of BrowsingReport created in this module.
 
     Raises
     ------
@@ -67,7 +67,7 @@ def main_flow(num_pages=0, shutdown=None):
     except pyautogui.FailSafeException:
         now = datetime.datetime.now().strftime('%H:%M:%S')
         print('\n[{}] FAILSAFE-ESCAPED.'.format(now))
-        report.report_non_function('\n[{}] FAILSAFE-ESCAPED.'.format(now))
+        log.report(f'\n[{now}] FAILSAFE-ESCAPED.')
     finally:
         create_browsing_report()
         os.system("{}".format(shutdown))
@@ -107,10 +107,9 @@ def start_browsing():
     If current page is start page, clicks 'Szukaj' (Search) button to reach first records page.
     If current page is records page, do nothing (let do_browsing() overtake).
     """
-    report.report_function(set_strony)
-    start_point = report.report_function(determine_startpoint)
-    if start_point == 1:
-        report.report_function(click_status_and_search)
+    log.report(set_strony)
+    if log.report(determine_startpoint) == 1:
+        log.report(click_status_and_search)
     else:
         pass
 
@@ -128,27 +127,26 @@ def do_browsing(number_of_pages):
 
     def browse_one_page():
         """Browse one result page and return count of items downloaded per page."""
-        report.report_function(await_blueline)
-        report.report_function(actively_check_list_site)
-        report.report_function(click_start)
-        report.report_function(switch_window_when_done)
-        new_items = report.report_function(click_back_n_times)
-        report.report_function(actively_check_list_site)
-        report.report_function(click_next)
+        log.report(actively_check_list_site)
+        log.report(click_start)
+        log.report(switch_window_when_done)
+        new_items = log.report(click_back_n_times)
+        log.report(actively_check_list_site)
+        log.report(click_next)
         return new_items
 
     pages_to_browse = (n for n in range(1, number_of_pages + 1))
     new_sum_total = 0
 
     for page in pages_to_browse:
-        report.report_non_function(f'\n{str(page)}\n')
+        log.report(f'\n{str(page)}\n')
         new_per_page = browse_one_page()
         new_sum_total += new_per_page
-        report.report_non_function('\n{}+{}/[{}]'.format('\t' * 5, new_per_page, new_sum_total))
+        log.report('\n{}+{}/[{}]'.format('\t' * 5, new_per_page, new_sum_total))
 
 
 def create_browsing_report():
-    """Create directory 'reports' if doesn't exist, save screen shot and browsing report to files."""
+    """Create directory 'reports' if doesn't exist, save screen shot and browsing log to files."""
     if 'reports' not in os.listdir('.') or not os.path.isdir('reports'):
         os.mkdir('reports')
     now = datetime.datetime.now().strftime('%Y.%m.%d_%H.%M')
@@ -157,4 +155,4 @@ def create_browsing_report():
     last_page.save(f'.\\reports\\{now}__screenshot.jpg')
 
     report_file = open(f'.\\reports\\{now}__report.txt', mode='w')
-    report_file.write(report.__repr__())
+    report_file.write(log.__repr__())
