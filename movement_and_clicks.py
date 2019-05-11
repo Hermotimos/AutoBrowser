@@ -5,6 +5,8 @@ Site features/events are represented by constants IMG_LISTA, IMG_STATUS etc., wh
 Functions in this module react to these features/events and their malfunctions.
 These reactions are building blocks of browsing_flow.py.
 
+All functions in this moduled are decorated with log_action() decorator to produce log and report.
+
 There are two functions in browsing_flow.py that use functions from this module:
 
 1) start_browsing() uses following functions:
@@ -14,6 +16,7 @@ There are two functions in browsing_flow.py that use functions from this module:
 
 
 2) do_browsing() uses following functions:
+    actively_check_list_site(): Checks if current page is results page.
     await_blueline():           Holds program until results page is loaded.
     click_start():              Clicks 'Start' button to initiate download.
     switch_window_when_done():  Goes back to search engine after download is finished.
@@ -23,13 +26,17 @@ There are two functions in browsing_flow.py that use functions from this module:
 """
 
 import sys
+import functools
 import pyautogui
 from image_recognition import try_click_image, recognize_number
 
+from report_class import BrowsingReport
+report = BrowsingReport()
+
 sys.setrecursionlimit(100)
+
 pyautogui.PAUSE = 0.5
 pyautogui.FAILSAFE = True
-
 width, height = pyautogui.size()
 
 IMG_LISTA = '.\\images\\IMG_LISTA.png'
@@ -48,8 +55,18 @@ IMG_NASTEPNA_2 = '.\\images\\IMG_NASTEPNA_2.png'
 IMG_NASTEPNA_3 = '.\\images\\IMG_NASTEPNA_3.png'
 
 
+# DECORATOR for logging
+
+def log_action(func):
+    @functools.wraps(func)
+    def wrapper():
+        return report.report_function(func)
+    return wrapper
+
+
 # ELEMENTS OF start_browsing()
 
+@log_action
 def set_strony():
     """Set number of pages browsed by downloading to 1.
 
@@ -63,6 +80,7 @@ def set_strony():
     pyautogui.typewrite('1')
 
 
+@log_action
 def determine_startpoint():
     """Determine if current page is the start page or the records page. Return 1 or 2 accordingly.
 
@@ -86,6 +104,7 @@ def determine_startpoint():
         determine_startpoint()
 
 
+@log_action
 def click_status_and_search():
     """Click location 'Status' on start page, scroll down and click 'Szukaj'."""
     try_click_image(IMG_STATUS)
@@ -107,7 +126,7 @@ def click_status_and_search():
 #         try_click_image(IMG_BACK)
 #         click_next()
 
-
+@log_action
 def actively_check_list_site():
     """Waits until results page is visible.
 
@@ -128,6 +147,7 @@ def actively_check_list_site():
         actively_check_list_site()
 
 
+@log_action
 def click_start():
     """Click 'Start' button to start downloading results.
 
@@ -146,6 +166,7 @@ def click_start():
         click_start()
 
 
+@log_action
 def switch_window_when_done():
     """Wait until downloading is done and click at location 'Wyszukiwarka' to switch back to searching tab.
 
@@ -166,6 +187,7 @@ def switch_window_when_done():
         switch_window_when_done()
 
 
+@log_action
 def click_back_n_times():
     """Click 'go back' button once plus once per each results page loaded during download.
 
@@ -183,6 +205,7 @@ def click_back_n_times():
     return new
 
 
+@log_action
 def click_next():
     """Scroll down and click 'nastepna' to go to next page.
 

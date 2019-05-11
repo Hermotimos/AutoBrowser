@@ -21,12 +21,12 @@ Todo
 import os
 import datetime
 import pyautogui
-from report_class import BrowsingReport
+from movement_and_clicks import report
 from movement_and_clicks import determine_startpoint, click_status_and_search, set_strony, \
                                    click_start, switch_window_when_done, click_back_n_times, \
                                    actively_check_list_site, click_next #, await_blueline
-
-report = BrowsingReport()
+# from report_class import BrowsingReport
+# report = BrowsingReport()
 
 
 def main_flow(num_pages=0, shutdown=None):
@@ -108,9 +108,9 @@ def start_browsing():
     If current page is start page, clicks 'Szukaj' (Search) button to reach first records page.
     If current page is records page, do nothing (let do_browsing() overtake).
     """
-    report.report_function(set_strony)
-    if report.report_function(determine_startpoint) == 1:
-        report.report_function(click_status_and_search)
+    set_strony()
+    if determine_startpoint() == 1:
+        click_status_and_search()
     else:
         pass
 
@@ -129,12 +129,12 @@ def do_browsing(number_of_pages):
     def browse_one_page():
         """Browse one result page and return count of items downloaded per page."""
         # report.report_function(await_blueline)
-        report.report_function(actively_check_list_site)
-        report.report_function(click_start)
-        report.report_function(switch_window_when_done)
-        new_items = report.report_function(click_back_n_times)
-        report.report_function(actively_check_list_site)
-        report.report_function(click_next)
+        actively_check_list_site()
+        click_start()
+        switch_window_when_done()
+        new_items = click_back_n_times()
+        actively_check_list_site()
+        click_next()
         return new_items
 
     pages_to_browse = (n for n in range(1, number_of_pages + 1))
