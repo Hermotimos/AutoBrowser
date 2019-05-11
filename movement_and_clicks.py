@@ -55,12 +55,14 @@ def set_strony():
 
     Clicks at location 'numer ostatniej strony' and moves 20 pixels beneath to the combo box.
     Activates the box, deletes whatever is in it and types '1' to ensure browsing of 1 page at a time.
+    Then places cursor over the query formular.
     """
     try_click_image(IMG_NROSTAT)
     pyautogui.move(0, 20)
     pyautogui.click()
     pyautogui.press('delete', presses=5)
     pyautogui.typewrite('1')
+    pyautogui.move(0, 50)
 
 
 def determine_startpoint():
