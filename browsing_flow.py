@@ -23,8 +23,9 @@ import datetime
 import pyautogui
 from report_class import BrowsingReport
 from movement_and_clicks import determine_startpoint, click_status_and_search, set_strony, \
-                                   await_blueline, click_start, switch_window_when_done, click_back_n_times, \
-                                   actively_check_list_site, click_next
+                                   click_start, switch_window_when_done, click_back_n_times, \
+                                   actively_check_list_site, click_next #, await_blueline
+
 report = BrowsingReport()
 
 
