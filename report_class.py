@@ -7,33 +7,42 @@ import time
 
 class BrowsingReport:
     """
-    Its objects may serve as logs printed out during program execution and/or as reports printed out afterwards.
-    report_function(): serves as log
-    __repr__(): serves as report, is dependant from report_function()
+    Its objects serve as logs printed out during program execution and as reports printed out afterwards.
+    report(): serves to print out log
+    __repr__(): serves to create end report, is dependant from report()
     """
 
     def __init__(self):
-        """Create object of BrowsingReport with attribute 'report' as empty str."""
+        """Create object of BrowsingReport with attribute 'log' as empty str."""
         self.session_report = ''
 
-    def __repr__(self):
-        """Return whole object."""
-        return self.session_report
+    def report(self, func_or_str):
+        """Print as log and add to 'session_report' all info about flow functions and additional lines for formatting.
 
-    def report_function(self, called_function):
-        """For every function passed to this method write info to report attribute and print out log.
+        Strings represent non-function data for report like page number or new items counter.
+        For every function or str passed to this method write info to attribute session_report' and print out into log.
 
-        For each function called as attribute of this method following data will be printed into log:
+        For each function called with this method following data will be printed into log and added to 'session_report':
         - execution starting time
         - function name
         - execution time
-        Same data is written into report attribute.
 
         Example
         -------
-            [20:24:47] determine_startpoint     	  5s
-            [20:24:52] click_status_and_search  	  8s
-            [20:25:00] set_strony               	  3s
+            [17:38:59] set_strony               	  3s
+            [17:39:02] determine_startpoint     	  5s
+
+            1
+            [17:39:07] actively_check_list_site 	  2s
+            [17:39:09] click_start              	  1s
+            [17:39:10] switch_window_when_done  	  5s
+            [17:39:15] click_back_n_times       2x 	  3s
+            [17:39:18] actively_check_list_site 	  2s
+            [17:39:19] click_next               	  3s
+
+                                +1/[1]
+            2
+            [17:39:22] actively_check_list_site 	  3s
             (...)
         """
         if isinstance(func_or_str, str):
@@ -64,4 +73,6 @@ class BrowsingReport:
 
             return returned_value
 
-
+    def __repr__(self):
+        """Return whole object."""
+        return self.session_report
