@@ -82,8 +82,7 @@ def determine_startpoint():
             or pyautogui.locateOnScreen(IMG_BLUELINE_2, grayscale=True):
         return 2
     else:
-        pyautogui.move(0, 50)
-        pyautogui.scroll(7000)
+        pyautogui.scroll(7000, x=50, y=200)
         determine_startpoint()
 
 
