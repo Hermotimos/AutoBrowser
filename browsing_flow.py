@@ -22,9 +22,8 @@ import os
 import datetime
 import pyautogui
 from report_class import BrowsingReport
-from movement_and_clicks import determine_startpoint, click_status_and_search, set_strony, \
-                                   click_start, switch_window_when_done, click_back_n_times, \
-                                   actively_check_list_site, click_next
+from movement_and_clicks import determine_startpoint, click_status_and_search, set_strony, click_start, \
+                                switch_window_when_done, click_back_n_times, actively_check_list_site, click_next
 
 log = BrowsingReport()
 
@@ -128,7 +127,6 @@ def do_browsing(number_of_pages):
 
     def browse_one_page():
         """Browse one result page and return count of items downloaded per page."""
-        # log.report(await_blueline)
         log.report(actively_check_list_site)
         log.report(click_start)
         log.report(switch_window_when_done)

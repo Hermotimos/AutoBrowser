@@ -97,7 +97,6 @@ def click_status_and_search():
 
 # ELEMENTS of do_browsing()
 
-
 def actively_check_list_site():
     """Waits until results page is visible.
 
