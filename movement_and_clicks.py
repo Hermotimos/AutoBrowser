@@ -179,7 +179,7 @@ def click_next():
 
     Site feature 'nastepna' come in two shades of blue depending on number of pages already browsed.
     It changes to darker blue after ca. 200.
-    If neither is visible, function recursively calls itself.
+    If neither is visible, clicks 'go back' button, moves cursor over result page and recursively calls itself.
 
     Raises
     ------
