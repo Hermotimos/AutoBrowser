@@ -63,7 +63,7 @@ def main_flow(num_pages=0, shutdown=None):
         do_browsing(num_pages)
     except RecursionError:
         print('\nPROGRAM RECALIBRATION')
-        do_browsing(num_pages)                      # Experimentally
+        do_browsing(num_pages)                      # todo Experimentally
     except pyautogui.FailSafeException:
         now = datetime.datetime.now().strftime('%H:%M:%S')
         print('\n[{}] FAILSAFE-ESCAPED.'.format(now))
