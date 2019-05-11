@@ -18,7 +18,6 @@ There are two functions in browsing_flow.py that use functions from this module:
 
 2) do_browsing() uses following functions:
     actively_check_list_site(): Checks if current page is results page.
-    await_blueline():           Holds program until results page is loaded.
     click_start():              Clicks 'Start' button to initiate download.
     switch_window_when_done():  Goes back to search engine after download is finished.
     click_back_n_times():       Goes back n time, where n = 1 + number of pages opened during download.
@@ -114,17 +113,6 @@ def click_status_and_search():
 
 # ELEMENTS of do_browsing()
 
-
-# def await_blueline():
-#     """Wait untill blue line (one of 2 possible shades) indicating list of results is visible. If not, click 'go back'.
-#
-#     If neither of blue line variants is visible, clicks 'back' button, as this usually unfreezes page hung by loading,
-#     and then click 'next' again.
-#     """
-#     if not (pyautogui.locateOnScreen(IMG_BLUELINE_1, 10, grayscale=True)
-#             or pyautogui.locateOnScreen(IMG_BLUELINE_2, 10, grayscale=True)):
-#         try_click_image(IMG_BACK)
-#         click_next()
 
 @log_action
 def actively_check_list_site():

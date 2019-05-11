@@ -24,9 +24,7 @@ import pyautogui
 from movement_and_clicks import report
 from movement_and_clicks import determine_startpoint, click_status_and_search, set_strony, \
                                    click_start, switch_window_when_done, click_back_n_times, \
-                                   actively_check_list_site, click_next #, await_blueline
-# from report_class import BrowsingReport
-# report = BrowsingReport()
+                                   actively_check_list_site, click_next
 
 
 def main_flow(num_pages=0, shutdown=None):
