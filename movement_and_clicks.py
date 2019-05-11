@@ -148,10 +148,10 @@ def switch_window_when_done():
     ------
         If recursion limit is exhausted RecursionError is raised. This enables main.py module to recalibrate program.
     """
-    if pyautogui.locateOnScreen(IMG_NOWE_DONE, 20, grayscale=True):
+    if pyautogui.locateOnScreen(IMG_NOWE_DONE, 10, grayscale=True):
         try_click_image(IMG_WYSZUKIWARKA_1)
         # region kwarg not specified, because it catches the moment between signatures and fires too soon
-    elif pyautogui.locateOnScreen(IMG_WYSZUKIWARKA_2, 1, grayscale=True, region=(0, 0, 0.5 * width, 0.5 * height)):
+    elif pyautogui.locateOnScreen(IMG_WYSZUKIWARKA_2, 10, grayscale=True, region=(0, 0, 0.5 * width, 0.5 * height)):
         try_click_image(IMG_WYSZUKIWARKA_2)
     else:
         switch_window_when_done()
