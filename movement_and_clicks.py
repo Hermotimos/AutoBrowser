@@ -82,7 +82,6 @@ def determine_startpoint():
             or pyautogui.locateOnScreen(IMG_BLUELINE_2, grayscale=True):
         return 2
     else:
-        pyautogui.scroll(7000, x=50, y=200)
         determine_startpoint()
 
 
@@ -106,12 +105,13 @@ def actively_check_list_site():
     ------
         If recursion limit is exhausted RecursionError is raised. This enables main.py module to recalibrate program.
     """
-    if pyautogui.locateOnScreen(IMG_LISTA, 15, grayscale=True, region=(0, 0, 0.5 * width, 0.3 * height)):
+    if pyautogui.locateOnScreen(IMG_LISTA, 10, grayscale=True, region=(0, 0, 0.5 * width, 0.3 * height)):
         try_click_image(IMG_LISTA)
     else:
-        pyautogui.move(0, 200, duration=2)
+        pyautogui.move(0, 200)
+        pyautogui.click()
         pyautogui.scroll(7000)
-        if pyautogui.locateOnScreen(IMG_LISTA, 15, grayscale=True, region=(0, 0, 0.5 * width, 0.3 * height)):
+        if pyautogui.locateOnScreen(IMG_LISTA, 10, grayscale=True, region=(0, 0, 0.5 * width, 0.3 * height)):
             try_click_image(IMG_LISTA)
         else:
             try_click_image(IMG_BACK)
