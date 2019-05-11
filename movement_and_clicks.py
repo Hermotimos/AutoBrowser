@@ -25,12 +25,8 @@ There are two functions in browsing_flow.py that use functions from this module:
 """
 
 import sys
-import functools
 import pyautogui
 from image_recognition import try_click_image, recognize_number
-
-from report_class import BrowsingReport
-report = BrowsingReport()
 
 sys.setrecursionlimit(100)
 
@@ -54,18 +50,8 @@ IMG_NASTEPNA_2 = '.\\images\\IMG_NASTEPNA_2.png'
 IMG_NASTEPNA_3 = '.\\images\\IMG_NASTEPNA_3.png'
 
 
-# DECORATOR for logging
-
-def log_action(func):
-    @functools.wraps(func)
-    def wrapper():
-        return report.report_function(func)
-    return wrapper
-
-
 # ELEMENTS OF start_browsing()
 
-@log_action
 def set_strony():
     """Set number of pages browsed by downloading to 1.
 
@@ -79,7 +65,6 @@ def set_strony():
     pyautogui.typewrite('1')
 
 
-@log_action
 def determine_startpoint():
     """Determine if current page is the start page or the records page. Return 1 or 2 accordingly.
 
@@ -103,7 +88,6 @@ def determine_startpoint():
         determine_startpoint()
 
 
-@log_action
 def click_status_and_search():
     """Click location 'Status' on start page, scroll down and click 'Szukaj'."""
     try_click_image(IMG_STATUS)
@@ -114,7 +98,6 @@ def click_status_and_search():
 # ELEMENTS of do_browsing()
 
 
-@log_action
 def actively_check_list_site():
     """Waits until results page is visible.
 
@@ -137,7 +120,6 @@ def actively_check_list_site():
             try_click_image(IMG_BACK)
 
 
-@log_action
 def click_start():
     """Click 'Start' button to start downloading results.
 
@@ -156,7 +138,6 @@ def click_start():
         click_start()
 
 
-@log_action
 def switch_window_when_done():
     """Wait until downloading is done and click at location 'Wyszukiwarka' to switch back to searching tab.
 
@@ -177,7 +158,6 @@ def switch_window_when_done():
         switch_window_when_done()
 
 
-@log_action
 def click_back_n_times():
     """Click 'go back' button once plus once per each results page loaded during download.
 
@@ -195,7 +175,6 @@ def click_back_n_times():
     return new
 
 
-@log_action
 def click_next():
     """Scroll down and click 'nastepna' to go to next page.
 
