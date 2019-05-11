@@ -111,7 +111,7 @@ def actively_check_list_site():
     if pyautogui.locateOnScreen(IMG_LISTA, 15, grayscale=True, region=(0, 0, 0.5 * width, 0.3 * height)):
         try_click_image(IMG_LISTA)
     else:
-        pyautogui.move(0, 30)
+        pyautogui.move(0, 200)
         pyautogui.scroll(7000)
         if pyautogui.locateOnScreen(IMG_LISTA, 15, grayscale=True, region=(0, 0, 0.5 * width, 0.3 * height)):
             try_click_image(IMG_LISTA)
