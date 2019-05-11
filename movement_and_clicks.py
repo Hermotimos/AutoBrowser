@@ -44,7 +44,6 @@ IMG_BACK = '.\\images\\IMG_BACK.png'
 IMG_START_BLACK = '.\\images\\IMG_START_BLACK.png'
 IMG_NOWE_DONE = '.\\images\\IMG_NOWE_DONE.png'
 IMG_WYSZUKIWARKA_1 = '.\\images\\IMG_WYSZUKIWARKA_1.png'
-IMG_WYSZUKIWARKA_2 = '.\\images\\IMG_WYSZUKIWARKA_2.png'
 IMG_NASTEPNA_1 = '.\\images\\IMG_NASTEPNA_1.png'
 IMG_NASTEPNA_2 = '.\\images\\IMG_NASTEPNA_2.png'
 IMG_NASTEPNA_3 = '.\\images\\IMG_NASTEPNA_3.png'
@@ -140,19 +139,14 @@ def click_start():
 def switch_window_when_done():
     """Wait until downloading is done and click at location 'Wyszukiwarka' to switch back to searching tab.
 
-    Downloading usually takes up to 20 secs, however freezes occur frequently.
-    Function waits 60 secs before it tests the possibility, that the right tab is already there.
-    If not, function calls itself recursively.
+    Downloading usually takes up to 20 secs, however freezes occur frequently, so function calls itself recursively.
 
     Raises
     ------
         If recursion limit is exhausted RecursionError is raised. This enables main.py module to recalibrate program.
     """
     if pyautogui.locateOnScreen(IMG_NOWE_DONE):
-        # todo if this still causes problems return to no grayscale !!!
         try_click_image(IMG_WYSZUKIWARKA_1)
-    # elif pyautogui.locateOnScreen(IMG_WYSZUKIWARKA_2, grayscale=True, region=(0, 0, 0.5 * width, 0.5 * height)):
-    #     try_click_image(IMG_WYSZUKIWARKA_2)
     else:
         switch_window_when_done()
 
