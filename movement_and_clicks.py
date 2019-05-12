@@ -116,6 +116,7 @@ def actively_check_list_site():
             try_click_image(IMG_LISTA)
         else:
             try_click_image(IMG_BACK)
+            actively_check_list_site()
 
 
 def click_start():
