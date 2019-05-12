@@ -25,6 +25,7 @@ There are two functions in browsing_flow.py that use functions from this module:
 """
 
 import sys
+import time
 import pyautogui
 from image_recognition import try_click_image, recognize_number
 
@@ -146,7 +147,7 @@ def switch_window_when_done():
     ------
         If recursion limit is exhausted RecursionError is raised. This enables main.py module to recalibrate program.
     """
-    pyautogui.move(0, 50, duration=0.5)
+    time.sleep(8)
     if pyautogui.locateOnScreen(IMG_NOWE_DONE, minSearchTime=10):
         try_click_image(IMG_WYSZUKIWARKA_1)
     else:
