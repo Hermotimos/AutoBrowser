@@ -138,12 +138,15 @@ def click_start():
 def switch_window_when_done():
     """Wait until downloading is done and click at location 'Wyszukiwarka' to switch back to searching tab.
 
+    Function takes 2 secs to move cursor, which creates delay before locateOnScreen() takes screen shot.
+    Otherwise screen shot is often made before downloading starts, so the function fires to soon.
     Downloading usually takes up to 20 secs, however freezes occur frequently, so function calls itself recursively.
 
     Raises
     ------
         If recursion limit is exhausted RecursionError is raised. This enables main.py module to recalibrate program.
     """
+    pyautogui.move(0, 50, duration=2)
     if pyautogui.locateOnScreen(IMG_NOWE_DONE, minSearchTime=10):
         try_click_image(IMG_WYSZUKIWARKA_1)
     else:
