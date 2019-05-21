@@ -54,18 +54,17 @@ def main_flow():
     num_pages (int): Received via user input when main_flow() is called first time; then passed down by recursive calls.
     shutdown (str): Received via user input when main_flow() is called first time; then passed down by recursive calls.
     """
-    if num_pages == 0:
-        num_pages = ask_number_pages()
-    if shutdown is None:
-        shutdown = ask_shutdown()
+
+    num_pages = ask_number_pages()
+    shutdown = ask_shutdown()
 
     try:
         start_browsing()
         do_browsing(num_pages)
-    except RecursionError:
+    except (RecursionError, TypeError):
         print('\nPROGRAM RECALIBRATION START')
         recalibrate()
-        print('\nPROGRAM RECALIBRATION END')
+        print('PROGRAM RECALIBRATION END')
         do_browsing(num_pages)
     except pyautogui.FailSafeException:
         now = datetime.datetime.now().strftime('%H:%M:%S')

@@ -78,7 +78,7 @@ def determine_startpoint():
     ------
         If recursion limit is exhausted RecursionError is raised. This enables main.py module to recalibrate program.
     """
-    if pyautogui.locateOnScreen(IMG_STATUS, grayscale=True, region=(0, 0, 0.5 * width, height)):
+    if pyautogui.locateOnScreen(IMG_STATUS, grayscale=True, region=(0, 0, 0.5*width, height)):
         return 1
     elif pyautogui.locateOnScreen(IMG_BLUELINE_1, grayscale=True) \
             or pyautogui.locateOnScreen(IMG_BLUELINE_2, grayscale=True):
@@ -107,13 +107,13 @@ def actively_check_list_site():
     ------
         If recursion limit is exhausted RecursionError is raised. This enables main.py module to recalibrate program.
     """
-    if pyautogui.locateOnScreen(IMG_LISTA, 10, grayscale=True, region=(0, 0, 0.5 * width, 0.3 * height)):
+    if pyautogui.locateOnScreen(IMG_LISTA, 10, grayscale=True, region=(0, 0, 0.5*width, 0.3*height)):
         try_click_image(IMG_LISTA)
     else:
         pyautogui.move(0, 200)
         pyautogui.click()
         pyautogui.scroll(7000)
-        if pyautogui.locateOnScreen(IMG_LISTA, 10, grayscale=True, region=(0, 0, 0.5 * width, 0.3 * height)):
+        if pyautogui.locateOnScreen(IMG_LISTA, 10, grayscale=True, region=(0, 0, 0.5*width, 0.3*height)):
             try_click_image(IMG_LISTA)
         else:
             try_click_image(IMG_BACK)
@@ -131,7 +131,7 @@ def click_start():
     ------
         If recursion limit is exhausted RecursionError is raised. This enables main.py module to recalibrate program.
     """
-    if pyautogui.locateOnScreen(IMG_START_BLACK, 30, grayscale=True, region=(0, 0, 0.5 * width, 0.3 * height)):
+    if pyautogui.locateOnScreen(IMG_START_BLACK, 30, grayscale=True, region=(0, 0, 0.5*width, 0.3*height)):
         try_click_image(IMG_START_BLACK)
     else:
         try_click_image(IMG_BACK)
@@ -185,11 +185,11 @@ def click_next():
         If recursion limit is exhausted RecursionError is raised. This enables main.py module to recalibrate program.
     """
     pyautogui.scroll(-7000)
-    if pyautogui.locateOnScreen(IMG_NASTEPNA_1, 2, grayscale=True, region=(0, 0.5 * height, width, height)):
+    if pyautogui.locateOnScreen(IMG_NASTEPNA_1, 2, grayscale=True, region=(0, 0.5*height, width, height)):
         try_click_image(IMG_NASTEPNA_1)
-    elif pyautogui.locateOnScreen(IMG_NASTEPNA_2, 2, grayscale=True, region=(0, 0.5 * height, width, height)):
+    elif pyautogui.locateOnScreen(IMG_NASTEPNA_2, 2, grayscale=True, region=(0, 0.5*height, width, height)):
         try_click_image(IMG_NASTEPNA_2)
-    elif pyautogui.locateOnScreen(IMG_NASTEPNA_3, 2, grayscale=True, region=(0, 0.5 * height, width, height)):
+    elif pyautogui.locateOnScreen(IMG_NASTEPNA_3, 2, grayscale=True, region=(0, 0.5*height, width, height)):
         try_click_image(IMG_NASTEPNA_3)
     else:
         try_click_image(IMG_BACK)
@@ -198,5 +198,5 @@ def click_next():
 
 
 def click_stop_if_not_done():
-    if pyautogui.locateOnScreen(IMG_STOP, 2, grayscale=True, region=(0, 0, 0.5 * width, 0.3 * height)):
+    if pyautogui.locateOnScreen(IMG_STOP, 2, grayscale=True, region=(0, 0, 0.5*width, 0.3*height)):
         try_click_image(IMG_STOP)
