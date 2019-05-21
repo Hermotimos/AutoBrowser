@@ -45,6 +45,7 @@ IMG_BACK = '.\\images\\IMG_BACK.png'
 IMG_START_BLACK = '.\\images\\IMG_START_BLACK.png'
 IMG_NOWE_DONE = '.\\images\\IMG_NOWE_DONE.png'
 IMG_WYSZUKIWARKA_1 = '.\\images\\IMG_WYSZUKIWARKA_1.png'
+IMG_WYSZUKIWARKA_2 = '.\\images\\IMG_WYSZUKIWARKA_2.png'
 IMG_NASTEPNA_1 = '.\\images\\IMG_NASTEPNA_1.png'
 IMG_NASTEPNA_2 = '.\\images\\IMG_NASTEPNA_2.png'
 IMG_NASTEPNA_3 = '.\\images\\IMG_NASTEPNA_3.png'
@@ -149,9 +150,12 @@ def switch_window_when_done():
     ------
         If recursion limit is exhausted RecursionError is raised. This enables main.py module to recalibrate program.
     """
-    time.sleep(6)
-    if pyautogui.locateOnScreen(IMG_NOWE_DONE, minSearchTime=10):
-        try_click_image(IMG_WYSZUKIWARKA_1)
+    time.sleep(5)
+    if pyautogui.locateOnScreen(IMG_NOWE_DONE, minSearchTime=10, grayscale=True, region=(0, 0, 0.5*width, 0.3*height)):
+        if pyautogui.locateOnScreen(IMG_WYSZUKIWARKA_2, grayscale=True, region=(0, 0, 0.2*width, 0.2*height)):
+            try_click_image(IMG_WYSZUKIWARKA_2)
+        else:
+            try_click_image(IMG_WYSZUKIWARKA_1)
     else:
         switch_window_when_done()
 
