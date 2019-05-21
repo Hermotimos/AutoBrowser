@@ -29,11 +29,11 @@ from movement_and_clicks import determine_startpoint, click_status_and_search, s
 log = BrowsingReport()
 
 
-def main_flow(num_pages=0, shutdown=None):
+def main_flow():
     """Perform browsing flow.
 
-    Asks user number of pages and shutdown mode, then follows to browsing.
-    Firstly, browsing is started either from main page or from any result page; result page is reached.
+    Asks user for number of pages and shutdown mode, then follows to browsing.
+    Firstly, browsing is started either from a result page or from main page (in this case reaches first result page).
     Secondly, one page is browsed at a time with possible 0-10 downloads until page limit set by user is reached.
     Thirdly, a screen shot and a report are saved into 'reports' directory and system is shut down if requested.
 
@@ -46,7 +46,7 @@ def main_flow(num_pages=0, shutdown=None):
         This is a save measure: program goes back to start_browsing() phase to possibly unfreeze the page.
     In case of FailSafeException the action is included into report and program terminates.
 
-    Todo: num_pages should be class so that it's modified and if passed down in case recalibration, it's modified value
+    Todo: num_pages should be class so that it's modified and if passed down in case recalibration, its modified value
           is passed down.
 
     Parameters
