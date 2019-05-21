@@ -48,6 +48,7 @@ IMG_WYSZUKIWARKA_1 = '.\\images\\IMG_WYSZUKIWARKA_1.png'
 IMG_NASTEPNA_1 = '.\\images\\IMG_NASTEPNA_1.png'
 IMG_NASTEPNA_2 = '.\\images\\IMG_NASTEPNA_2.png'
 IMG_NASTEPNA_3 = '.\\images\\IMG_NASTEPNA_3.png'
+IMG_STOP = '.\\images\\IMG_STOP.png'
 
 
 # ELEMENTS OF start_browsing()
@@ -194,3 +195,8 @@ def click_next():
         try_click_image(IMG_BACK)
         pyautogui.move(0, 50)
         click_next()
+
+
+def click_stop_if_not_done():
+    if pyautogui.locateOnScreen(IMG_STOP, 2, grayscale=True, region=(0, 0, 0.5 * width, 0.3 * height)):
+        try_click_image(IMG_STOP)

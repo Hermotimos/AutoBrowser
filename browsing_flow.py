@@ -23,7 +23,8 @@ import datetime
 import pyautogui
 from report_class import BrowsingReport
 from movement_and_clicks import determine_startpoint, click_status_and_search, set_strony, click_start, \
-                                switch_window_when_done, click_back_n_times, actively_check_list_site, click_next
+                                switch_window_when_done, click_back_n_times, actively_check_list_site, click_next, \
+                                click_stop_if_not_done
 
 log = BrowsingReport()
 
@@ -62,8 +63,10 @@ def main_flow(num_pages=0, shutdown=None):
         start_browsing()
         do_browsing(num_pages)
     except RecursionError:
-        print('\nPROGRAM RECALIBRATION')
-        do_browsing(num_pages)                      # todo Experimentally
+        print('\nPROGRAM RECALIBRATION START')
+        recalibrate()
+        print('\nPROGRAM RECALIBRATION END')
+        do_browsing(num_pages)
     except pyautogui.FailSafeException:
         now = datetime.datetime.now().strftime('%H:%M:%S')
         print('\n[{}] FAILSAFE-ESCAPED.'.format(now))
@@ -143,6 +146,12 @@ def do_browsing(number_of_pages):
         new_per_page = browse_one_page()
         new_sum_total += new_per_page
         log.report('\n{}+{}/[{}]'.format('\t' * 5, new_per_page, new_sum_total))
+
+
+def recalibrate():
+    log.report(click_stop_if_not_done)
+    log.report(switch_window_when_done)
+    log.report(click_back_n_times)
 
 
 def create_browsing_report():
