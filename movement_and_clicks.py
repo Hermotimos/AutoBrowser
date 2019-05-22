@@ -50,6 +50,7 @@ IMG_NASTEPNA_1 = '.\\images\\IMG_NASTEPNA_1.png'
 IMG_NASTEPNA_2 = '.\\images\\IMG_NASTEPNA_2.png'
 IMG_NASTEPNA_3 = '.\\images\\IMG_NASTEPNA_3.png'
 IMG_STOP = '.\\images\\IMG_STOP.png'
+IMG_BREAK = '.\\images\\IMG_BREAK.png'
 
 
 # ELEMENTS OF start_browsing()
@@ -197,8 +198,9 @@ def click_next():
     elif pyautogui.locateOnScreen(IMG_NASTEPNA_3, 2, grayscale=True, region=(0, 0.5*height, width, height)):
         try_click_image(IMG_NASTEPNA_3)
     else:
+        try_click_image(IMG_BREAK)
         try_click_image(IMG_BACK)
-        pyautogui.move(0, 50)
+        pyautogui.move(0, 50, duration=5)
         click_next()
 
 
