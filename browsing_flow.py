@@ -29,6 +29,7 @@ from movement_and_clicks import determine_startpoint, click_status_and_search, s
 log = BrowsingReport()
 page_counter = MyCounter(start_count_from=1)
 item_counter = MyCounter(start_count_from=0)
+recalibration_counter = MyCounter(start_count_from=0)
 
 
 def main_flow():
@@ -65,6 +66,7 @@ def main_flow():
     except (RecursionError, TypeError):
         print('\nPROGRAM RECALIBRATION START')
         recalibrate()
+        recalibration_counter.increment()
         print('PROGRAM RECALIBRATION END')
         do_browsing(num_pages)
     except pyautogui.FailSafeException:
@@ -142,7 +144,7 @@ def do_browsing(number_of_pages):
         page_counter.increment()
         log.report(f'\n{str(page)}/{number_of_pages}\n')
         new_per_page = browse_one_page()
-        log.report('\n{}+{}/[{}]'.format('\t' * 5, new_per_page, item_counter.current()))
+        log.report('------\n+{}/[{}]\n'.format(new_per_page, item_counter.current()))
 
 
 def recalibrate():
@@ -153,9 +155,15 @@ def recalibrate():
 
 def create_browsing_report():
     """Create directory 'reports' if doesn't exist, save screen shot and browsing log to files."""
+
+    now = datetime.datetime.now().strftime('%Y.%m.%d_%H.%M')
+    log.report(f'\n[{now}] FINISHED.')
+    log.report(f'\n[{now}] {page_counter.current()} pages.')
+    log.report(f'\n[{now}] {item_counter.current()} new items.')
+    log.report(f'\n[{now}] {recalibration_counter.current()} recalibrations.')
+
     if 'reports' not in os.listdir('.') or not os.path.isdir('reports'):
         os.mkdir('reports')
-    now = datetime.datetime.now().strftime('%Y.%m.%d_%H.%M')
 
     last_page = pyautogui.screenshot()
     last_page.save(f'.\\reports\\{now}__screenshot.jpg')
