@@ -76,3 +76,20 @@ class BrowsingReport:
     def __repr__(self):
         """Return whole object."""
         return self.session_report
+
+
+class MyCounter:
+    def __init__(self, start_count_from=0):
+        self.number = start_count_from
+
+    def increment(self, increment_by=1):
+        self.number += increment_by
+
+    def __repr__(self):
+        """Return current pages count."""
+        return self.number
+
+    def current(self):
+        """Return current pages count - same as __repr__ but for clarity's sake."""
+        return self.number
+
