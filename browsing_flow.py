@@ -32,7 +32,7 @@ item_counter = MyCounter(start_count_from=0)
 recalibration_counter = MyCounter(start_count_from=0)
 
 
-def main_flow():
+def main_flow(num_pages=0, shutdown=None):
     """Perform browsing flow.
 
     Asks user for number of pages and shutdown mode, then follows to browsing.
@@ -57,8 +57,9 @@ def main_flow():
     num_pages (int): Received via user input when main_flow() is called first time; then passed down by recursive calls.
     shutdown (str): Received via user input when main_flow() is called first time; then passed down by recursive calls.
     """
-    num_pages = ask_number_pages()
-    shutdown = ask_shutdown()
+    if num_pages == 0 and shutdown is None:
+        num_pages = ask_number_pages()
+        shutdown = ask_shutdown()
 
     try:
         start_browsing()
@@ -71,8 +72,10 @@ def main_flow():
         do_browsing(num_pages)
     except pyautogui.FailSafeException:
         now = datetime.datetime.now().strftime('%H:%M:%S')
-        print('\n[{}] FAILSAFE-ESCAPED.'.format(now))
-        log.report(f'\n[{now}] FAILSAFE-ESCAPED.')
+        log.report(f'\n[{now}] PAUSED.')
+        input('Press ENTER to continue')
+        page_counter.increment(increment_by=-1)
+        main_flow(num_pages, shutdown)
     finally:
         create_browsing_report()
         os.system("{}".format(shutdown))
