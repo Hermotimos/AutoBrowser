@@ -39,10 +39,11 @@ IMG_LISTA = '.\\images\\IMG_LISTA.png'
 IMG_STATUS = '.\\images\\IMG_STATUS.png'
 IMG_SZUKAJ = '.\\images\\IMG_SZUKAJ.png'
 IMG_NROSTAT = '.\\images\\IMG_NROSTAT.png'
-IMG_BLUELINE_1 = '.\\images\\IMG_BLUELINE_1.png'
-IMG_BLUELINE_2 = '.\\images\\IMG_BLUELINE_2.png'
+# IMG_BLUELINE_1 = '.\\images\\IMG_BLUELINE_1.png'
+# IMG_BLUELINE_2 = '.\\images\\IMG_BLUELINE_2.png'
 IMG_BACK = '.\\images\\IMG_BACK.png'
 IMG_START_BLACK = '.\\images\\IMG_START_BLACK.png'
+# IMG_START_GRAY = '.\\images\\IMG_START_GRAY.png'
 IMG_NOWE_DONE = '.\\images\\IMG_NOWE_DONE.png'
 IMG_WYSZUKIWARKA_1 = '.\\images\\IMG_WYSZUKIWARKA_1.png'
 IMG_WYSZUKIWARKA_2 = '.\\images\\IMG_WYSZUKIWARKA_2.png'
@@ -82,8 +83,7 @@ def determine_startpoint():
     """
     if pyautogui.locateOnScreen(IMG_STATUS, grayscale=True, region=(0, 0, 0.5*width, height)):
         return 1
-    elif pyautogui.locateOnScreen(IMG_BLUELINE_1, grayscale=True) \
-            or pyautogui.locateOnScreen(IMG_BLUELINE_2, grayscale=True):
+    elif pyautogui.locateOnScreen(IMG_START_BLACK, grayscale=True, region=(0, 0, 0.5*width, 0.5*height)):
         return 2
     else:
         determine_startpoint()
