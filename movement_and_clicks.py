@@ -174,6 +174,7 @@ def click_back_n_times():
     new = recognize_number()
     n_times = new + 1
     try_click_image(IMG_BACK, clicks=n_times, interval=0.5)
+    pyautogui.move(0, 100, duration=1)
     return new
 
 

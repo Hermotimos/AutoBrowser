@@ -133,7 +133,7 @@ def do_browsing(number_of_pages):
         log.report(click_start)
         log.report(switch_window_when_done)
         new_items = log.report(click_back_n_times)
-        log.report(actively_check_list_site)
+        # log.report(actively_check_list_site)
         log.report(click_next)
         return new_items
 
