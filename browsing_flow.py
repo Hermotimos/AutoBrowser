@@ -54,7 +54,6 @@ def main_flow():
     num_pages (int): Received via user input when main_flow() is called first time; then passed down by recursive calls.
     shutdown (str): Received via user input when main_flow() is called first time; then passed down by recursive calls.
     """
-
     num_pages = ask_number_pages()
     shutdown = ask_shutdown()
 
@@ -133,7 +132,6 @@ def do_browsing(number_of_pages):
         log.report(click_start)
         log.report(switch_window_when_done)
         new_items = log.report(click_back_n_times)
-        # log.report(actively_check_list_site)
         log.report(click_next)
         return new_items
 
