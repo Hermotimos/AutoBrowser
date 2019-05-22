@@ -21,12 +21,13 @@ Todo
 import os
 import datetime
 import pyautogui
-from report_class import BrowsingReport
+from report_classes import BrowsingReport, Pages
 from movement_and_clicks import determine_startpoint, click_status_and_search, set_strony, click_start, \
                                 switch_window_when_done, click_back_n_times, actively_check_list_site, click_next, \
                                 click_stop_if_not_done
 
 log = BrowsingReport()
+page_counter = Pages()
 
 
 def main_flow():
@@ -135,10 +136,9 @@ def do_browsing(number_of_pages):
         log.report(click_next)
         return new_items
 
-    pages_to_browse = (n for n in range(1, number_of_pages + 1))
     new_sum_total = 0
 
-    for page in pages_to_browse:
+    for page in range(1, number_of_pages + 1):
         log.report(f'\n{str(page)}\n')
         new_per_page = browse_one_page()
         new_sum_total += new_per_page
