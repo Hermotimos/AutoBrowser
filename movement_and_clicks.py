@@ -52,6 +52,7 @@ IMG_NASTEPNA_2 = '.\\images\\IMG_NASTEPNA_2.png'
 IMG_NASTEPNA_3 = '.\\images\\IMG_NASTEPNA_3.png'
 IMG_STOP = '.\\images\\IMG_STOP.png'
 IMG_BREAK = '.\\images\\IMG_BREAK.png'
+IMG_NOT_DONE = '.\\images\\IMG_NOT_DONE.png'
 
 
 # ELEMENTS OF start_browsing()
