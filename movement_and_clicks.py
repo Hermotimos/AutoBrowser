@@ -152,7 +152,7 @@ def switch_window_when_done():
     ------
         If recursion limit is exhausted RecursionError is raised. This enables main.py module to recalibrate program.
     """
-    time.sleep(2)
+    time.sleep(1)
     if pyautogui.locateOnScreen(IMG_NOWE_DONE, grayscale=True, region=(0, 0, 0.5*WIDTH, 0.2*HEIGHT)):
         time.sleep(1)
         if pyautogui.locateOnScreen(IMG_NOWE_DONE, grayscale=True, region=(0, 0, 0.5*WIDTH, 0.2*HEIGHT)):
@@ -175,15 +175,15 @@ def click_back_n_times():
     -------
         int: Number of new results. This is then used by BrowsingReport class for running total of downloads.
     """
+    new = recognize_number()
+    n_times = new + 1
     if pyautogui.locateOnScreen(IMG_WYSZUKIWARKA_2, grayscale=True, region=(0, 0, 0.5 * WIDTH, 0.2 * HEIGHT)):
-        new = recognize_number()
-        n_times = new + 1
         try_click_image(IMG_BACK, clicks=n_times, interval=0.5)
         pyautogui.move(0, 100, duration=1)
-        return new
     else:
         try_click_image(IMG_WYSZUKIWARKA_1)
         click_back_n_times()
+    return new
 
 
 def click_next():
