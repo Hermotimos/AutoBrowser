@@ -154,7 +154,7 @@ def switch_window_when_done():
     """
     time.sleep(2)
     if pyautogui.locateOnScreen(IMG_NOWE_DONE, grayscale=True, region=(0, 0, 0.5*WIDTH, 0.2*HEIGHT)):
-        time.sleep(2)
+        time.sleep(1)
         if pyautogui.locateOnScreen(IMG_NOWE_DONE, grayscale=True, region=(0, 0, 0.5*WIDTH, 0.2*HEIGHT)):
             if pyautogui.locateOnScreen(IMG_WYSZUKIWARKA_1, grayscale=True, region=(0, 0, 0.2 * WIDTH, 0.2 * HEIGHT)):
                 try_click_image(IMG_WYSZUKIWARKA_1)
