@@ -186,7 +186,6 @@ def click_back_n_times():
         click_back_n_times()
 
 
-
 def click_next():
     """Scroll down and click 'nastepna' to go to next page.
 
