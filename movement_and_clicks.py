@@ -156,10 +156,10 @@ def switch_window_when_done():
     if pyautogui.locateOnScreen(IMG_NOWE_DONE, grayscale=True, region=(0, 0, 0.5*WIDTH, 0.2*HEIGHT)):
         time.sleep(1)
         if pyautogui.locateOnScreen(IMG_NOWE_DONE, grayscale=True, region=(0, 0, 0.5*WIDTH, 0.2*HEIGHT)):
-            if pyautogui.locateOnScreen(IMG_WYSZUKIWARKA_2, grayscale=True, region=(0, 0, 0.2 * WIDTH, 0.2 * HEIGHT)):
-                try_click_image(IMG_WYSZUKIWARKA_2)
-            else:
+            if pyautogui.locateOnScreen(IMG_WYSZUKIWARKA_1, grayscale=True, region=(0, 0, 0.2 * WIDTH, 0.2 * HEIGHT)):
                 try_click_image(IMG_WYSZUKIWARKA_1)
+            else:
+                try_click_image(IMG_WYSZUKIWARKA_2)
     else:
         switch_window_when_done()
 
