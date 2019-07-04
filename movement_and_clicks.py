@@ -35,24 +35,24 @@ pyautogui.PAUSE = 0.5
 pyautogui.FAILSAFE = True
 WIDTH, HEIGHT = pyautogui.size()
 
-IMG_LISTA = '.\\images\\IMG_LISTA.png'
-IMG_STATUS = '.\\images\\IMG_STATUS.png'
-IMG_SZUKAJ = '.\\images\\IMG_SZUKAJ.png'
-IMG_NROSTAT = '.\\images\\IMG_NROSTAT.png'
+IMG_BACK = '.\\images\\IMG_BACK.png'
 # IMG_BLUELINE_1 = '.\\images\\IMG_BLUELINE_1.png'
 # IMG_BLUELINE_2 = '.\\images\\IMG_BLUELINE_2.png'
-IMG_BACK = '.\\images\\IMG_BACK.png'
-IMG_START_BLACK = '.\\images\\IMG_START_BLACK.png'
-# IMG_START_GRAY = '.\\images\\IMG_START_GRAY.png'
-IMG_NOWE_DONE = '.\\images\\IMG_NOWE_DONE.png'
-IMG_WYSZUKIWARKA_1 = '.\\images\\IMG_WYSZUKIWARKA_1.png'
-IMG_WYSZUKIWARKA_2 = '.\\images\\IMG_WYSZUKIWARKA_2.png'
+IMG_BREAK = '.\\images\\IMG_BREAK.png'
+IMG_LISTA = '.\\images\\IMG_LISTA.png'
 IMG_NASTEPNA_1 = '.\\images\\IMG_NASTEPNA_1.png'
 IMG_NASTEPNA_2 = '.\\images\\IMG_NASTEPNA_2.png'
 IMG_NASTEPNA_3 = '.\\images\\IMG_NASTEPNA_3.png'
+# IMG_NOT_DONE = '.\\images\\IMG_NOT_DONE.png'
+IMG_NOWE_DONE = '.\\images\\IMG_NOWE_DONE.png'
+IMG_NROSTAT = '.\\images\\IMG_NROSTAT.png'
+IMG_START_BLACK = '.\\images\\IMG_START_BLACK.png'
+IMG_START_GRAY = '.\\images\\IMG_START_GRAY.png'
+IMG_STATUS = '.\\images\\IMG_STATUS.png'
 IMG_STOP = '.\\images\\IMG_STOP.png'
-IMG_BREAK = '.\\images\\IMG_BREAK.png'
-IMG_NOT_DONE = '.\\images\\IMG_NOT_DONE.png'
+IMG_SZUKAJ = '.\\images\\IMG_SZUKAJ.png'
+IMG_WYSZUKIWARKA_1 = '.\\images\\IMG_WYSZUKIWARKA_1.png'
+IMG_WYSZUKIWARKA_2 = '.\\images\\IMG_WYSZUKIWARKA_2.png'
 
 
 # ELEMENTS OF start_browsing()
