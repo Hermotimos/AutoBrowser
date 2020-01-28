@@ -112,7 +112,7 @@ def ask_shutdown():
 def start_browsing():
     """Set number of pages browsed at a time to 1 and reach next records page according to the determined current page.
 
-    If current page is start page, clicks 'Szukaj' (Search) button to reach first records page.
+    If current page is start page, click 'Szukaj' (Search) button to reach first records page.
     If current page is records page, do nothing (let do_browsing() overtake).
     """
     log.report(set_strony)
